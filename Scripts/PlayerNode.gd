@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-const laser_beam = preload("res://Scenes/Laser.tscn")
+const pl_laser_beam = preload("res://Scenes/Laser.tscn")
+
 
 func get_input():	
 	if Input.is_action_pressed("ui_left"):
@@ -12,20 +13,15 @@ func get_input():
 			$Arrow.rotation_degrees += 1
 			
 	if Input.is_action_pressed("ui_up"):
-		shoot()
-
+		if !$"/root/Global".laser_fired:
+			$"/root/Global".laser_fired = true
+			shoot()
 
 	
 func _physics_process(delta: float) -> void:
 	get_input()
 	
 func shoot():
-#	print($Arrow.rotation_degrees)
-	var laser_path = laser_beam.instance()	
-#	laser_path.rotation = -$Arrow.rotation_degrees
-
-	add_child(laser_path)
-	
-	laser_path.position = $Position2D.global_position
-
-
+	print("SHOT!")
+	var laser_instance = pl_laser_beam.instance()
+	get_tree().current_scene.add_child(laser_instance)
