@@ -1,7 +1,10 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/texture_laser.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=2]
+[ext_resource path="res://Assets/laser_fire.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/synth_misc_12.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Assets/SoccerBall.png" type="Texture" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -91,28 +94,37 @@ animations = [ {
 "speed": 30.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=18]
-extents = Vector2( 25, 257 )
+[sub_resource type="CircleShape2D" id=18]
+radius = 48.0833
 
-[node name="Laser" type="Area2D"]
-modulate = Color( 0.588235, 0.65098, 0.0313726, 1 )
+[node name="Laser" type="KinematicBody2D"]
 position = Vector2( 242, 1247 )
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+visible = false
 position = Vector2( 2, -22 )
 frames = SubResource( 17 )
 animation = "laser"
-frame = 12
+frame = 15
 speed_scale = 3.0
 playing = true
 offset = Vector2( 0, -240 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.99902, -263 )
+position = Vector2( 2, 2 )
 shape = SubResource( 18 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="LaserEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="LaserGone" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
