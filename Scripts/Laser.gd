@@ -1,30 +1,23 @@
 extends KinematicBody2D
 
-export var speed: float = 600
-
-var local_angle
+export var speed: float = 1000
 
 var velocity = Vector2()
 
-#export (int) var dir
-
-
 var rebounding = false
 
+var local_angle
+
+
 func _ready() -> void:
-	local_angle = $"/root/Global".laser_angle
-	local_angle += PI	
-	velocity = Vector2(local_angle * speed, 200)
-	print(local_angle)
-#	$LaserEffect.play()
+	rotation_degrees = $"/root/Global".laser_angle
+	velocity = Vector2(speed, speed).rotated(rotation)
+
 
 func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity * delta)
-	
 	if collision_info:
 		velocity = velocity.bounce(collision_info.normal)
-#		velocity.x *= 0.9
-#		velocity.y *= 0.9
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -39,4 +32,3 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 	$"/root/Global".laser_fired = false
 	rebounding = false
 	queue_free()
-	

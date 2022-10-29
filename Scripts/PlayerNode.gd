@@ -31,9 +31,11 @@ func shoot():
 	# put the laser on the tip of the arrow
 	laser_instance.global_position = $Arrow/Position2D.global_position
 	
-	# rotate the laser to match the arrow (adjusted for the -90 degrees I created it at during setup, that I'm too lazy to rectify – this is all placeholder art anyway for the prototype that this is)
-	laser_instance.rotation = rotation_degrees
-	$"/root/Global".laser_angle = rotation_degrees
+	# rotate the laser to match the arrow 
+	laser_instance.global_rotation = deg2rad(global_rotation)
+	$"/root/Global".laser_angle = rotation
 	
 	# now the laser is added to the scene at the correct place and at the correct rotation angle
-	get_tree().current_scene.add_child(laser_instance)
+	get_tree().root.get_child(0).add_child(laser_instance)
+		
+	print(">>>", laser_instance.global_rotation)
