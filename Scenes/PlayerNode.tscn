@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/big_arrow.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10, 36 )
+extents = Vector2( 8.5, 39 )
 
 [node name="PlayerNode" type="KinematicBody2D"]
 position = Vector2( 360, 1200 )
@@ -21,5 +21,5 @@ position = Vector2( 1123.62, -24.2505 )
 rotation = 0.0238047
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1, -41 )
+position = Vector2( -1.5, -44 )
 shape = SubResource( 1 )

@@ -8,3 +8,6 @@ onready var laser_angle = 0
 
 func _ready() -> void:
 	print(screensize)
+	
+#func increase_speed(increase_amount):
+	
