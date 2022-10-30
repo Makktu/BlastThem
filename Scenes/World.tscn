@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/PlayerNode.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/SpeedBooster.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/ObstacleWorld.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/World.gd" type="Script" id=3]
 
 [sub_resource type="QuadMesh" id=1]
 
@@ -9,6 +10,7 @@
 extents = Vector2( 8.80903, 1.45 )
 
 [node name="World" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="PlayerNode" parent="." instance=ExtResource( 1 )]
 
@@ -52,14 +54,4 @@ rotation = -3.14159
 scale = Vector2( 72, 10 )
 shape = SubResource( 2 )
 
-[node name="SpeedBooster" parent="." instance=ExtResource( 2 )]
-position = Vector2( 176, 317 )
-
-[node name="SpeedBooster2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 224, 664 )
-
-[node name="SpeedBooster3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 502, 183 )
-
-[node name="SpeedBooster4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 491, 493 )
+[node name="ObstacleWorld" parent="." instance=ExtResource( 2 )]

@@ -1,23 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
+[ext_resource path="res://Assets/blip.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=2]
 [ext_resource path="res://Assets/SoccerBall.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=18]
-radius = 48.0833
+radius = 46.0435
 
 [node name="Laser" type="KinematicBody2D"]
 position = Vector2( 242, 1247 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.35, 0.35 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2, 2 )
 shape = SubResource( 18 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="BlipNoise" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = -24.618
+pitch_scale = 4.0
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

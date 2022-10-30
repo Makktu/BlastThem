@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	get_input()
 	
 func shoot():
+#	self.visible = false
 
 	# create local instance of the laser – **this is not on-screen yet**
 	var laser_instance = pl_laser_beam.instance()
@@ -35,7 +36,6 @@ func shoot():
 	
 	# rotate the laser to match the arrow 
 	laser_instance.global_rotation_degrees = rotation_degrees
-	print(laser_instance.global_rotation_degrees)
 	$"/root/Global".laser_angle = global_rotation_degrees
 	
 	# now the laser is added to the scene at the correct place and at the correct rotation angle
