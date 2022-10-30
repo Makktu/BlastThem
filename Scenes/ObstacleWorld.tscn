@@ -30,7 +30,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 100 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 20 ) ]
 }
 
 [node name="ObstacleWorld" type="Node2D"]
@@ -39,7 +39,7 @@ script = ExtResource( 2 )
 [node name="ObstacleContainer" type="Node2D" parent="."]
 
 [node name="SpeedBooster" parent="ObstacleContainer" instance=ExtResource( 1 )]
-position = Vector2( 176, 317 )
+position = Vector2( 326, 700 )
 
 [node name="SpeedBooster2" parent="ObstacleContainer" instance=ExtResource( 1 )]
 position = Vector2( 224, 664 )

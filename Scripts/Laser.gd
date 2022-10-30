@@ -50,23 +50,9 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.bounce(collision_info.normal)
 		print(collision_info.collider.name)
 		if collision_info.collider.name.left(12) == "SpeedBooster" and !increased_speed:
-			print("BOOSTED!")
 			velocity = Vector2(0, speed + 1000)
-			speed += 1000 # not working yet
 			increased_speed = true
 			$BlipNoise.play()
-		
-#			velocity += Vector2(0, speed + 1000)
-#			increased_speed = true
-
-		print("HIT THE THING")
-
-			
-
-#	apply_impulse(Vector2(), Vector2(speed, speed).rotated(local_angle))		
-	if Input.is_action_pressed("ui_accept"):
-		print(position.x, " / ", position.y)
-		print(global_rotation_degrees)
 	
 
 func _unhandled_input(event: InputEvent) -> void:
