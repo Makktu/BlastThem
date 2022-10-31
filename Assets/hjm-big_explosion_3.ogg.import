@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hjm-big_explosion_3.ogg-d9170a1522c21074ea01a31dd7e08a5a.oggstr"
+
+[deps]
+
+source_file="res://Assets/hjm-big_explosion_3.ogg"
+dest_files=[ "res://.import/hjm-big_explosion_3.ogg-d9170a1522c21074ea01a31dd7e08a5a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

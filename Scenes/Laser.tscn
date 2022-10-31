@@ -1,19 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/blip.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=3]
 [ext_resource path="res://Assets/SoccerBall.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=18]
-radius = 46.0435
+radius = 46.5109
 
 [node name="Laser" type="KinematicBody2D"]
 position = Vector2( 242, 1247 )
-scale = Vector2( 0.35, 0.35 )
+scale = Vector2( 0.19, 0.19 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 5 )
+
+[node name="Light2D" type="Light2D" parent="Sprite"]
+texture = ExtResource( 3 )
+texture_scale = 1.27
+color = Color( 0.0470588, 0.894118, 0.835294, 1 )
+energy = 2.09
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 18 )

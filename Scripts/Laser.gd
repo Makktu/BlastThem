@@ -26,21 +26,20 @@ var increased_speed = false
 func _ready() -> void:
 	velocity = velocity.rotated(deg2rad(global_rotation_degrees))
 	local_angle = $"/root/Global".laser_angle
-	print(">>>>>>>>>>>>> ", global_rotation_degrees, " / ", local_angle)
 
 
 func _physics_process(delta: float) -> void:
-	if current_pos_x == position.x:
-		x_count += 1
-	if current_pos_y == position.y:
-		y_count += 1
-		
-	if x_count > 3:
-		position.x += 10
-		x_count = 0
-	if y_count > 3:
-		position.y -= 10
-		y_count = 0
+#	if current_pos_x == position.x:
+#		x_count += 1
+#	if current_pos_y == position.y:
+#		y_count += 1
+#
+#	if x_count > 3:
+#		position.x += 10
+#		x_count = 0
+#	if y_count > 3:
+#		position.y -= 10
+#		y_count = 0
 	
 	current_pos_x = position.x
 	current_pos_y = position.y
@@ -48,7 +47,6 @@ func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
 		velocity = velocity.bounce(collision_info.normal)
-		print(collision_info.collider.name)
 		if collision_info.collider.name.left(12) == "SpeedBooster" and !increased_speed:
 			velocity = Vector2(0, speed + 1000)
 			increased_speed = true
@@ -63,9 +61,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
+#	$"/root/Global".check_all_balls()
+#	if !$"/root/Global".all_balls_gone:
+#		return
+	$"/root/Global".new_shot += 1
 	print("GONE")
-	$"/root/Global".laser_fired = false
-#	$"/root/Global".move_obstacles("down")
-	get_parent().move_down()
-	rebounding = false
+	if $"/root/Global".new_shot == $"/root/Global".difficulty:
+			
+
+		$"/root/Global".laser_fired = false
+	#	$"/root/Global".move_obstacles("down")
+		get_parent().move_down()
+		rebounding = false
+		$"/root/Global".new_shot = 0
+#		$"/root/Global".difficulty += 1
 	queue_free()
