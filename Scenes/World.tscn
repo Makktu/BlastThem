@@ -1,17 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/PlayerNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/ObstacleWorld.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/World.gd" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://Scripts/World.gd" type="Script" id=3]
 
 [sub_resource type="QuadMesh" id=1]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.80903, 1.45 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 368, 10 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -59,19 +55,3 @@ scale = Vector2( 72, 10 )
 shape = SubResource( 2 )
 
 [node name="ObstacleWorld" parent="." instance=ExtResource( 2 )]
-
-[node name="GameOverLine" type="Area2D" parent="."]
-position = Vector2( 15, 756 )
-scale = Vector2( 0.96, 1 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameOverLine"]
-position = Vector2( 358, 0 )
-shape = SubResource( 3 )
-
-[node name="Sprite" type="Sprite" parent="GameOverLine"]
-self_modulate = Color( 1, 1, 1, 0.439216 )
-position = Vector2( 344.792, 1 )
-scale = Vector2( 15.875, 0.28 )
-texture = ExtResource( 4 )
-
-[connection signal="body_entered" from="GameOverLine" to="." method="_on_GameOverLine_body_entered"]

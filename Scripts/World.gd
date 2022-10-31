@@ -12,11 +12,4 @@ func move_down():
 		$ObstacleWorld.position.y += 20
 	if turn_one:
 		turn_one = false
-	if $ObstacleWorld.position.y > 350:
-		print("GAME OVER")
 
-
-func _on_GameOverLine_body_entered(body):
-	print(body.name)
-	if body.name == "SpeedBooster":
-		print("*******TRUE GAME OVER !!!") 

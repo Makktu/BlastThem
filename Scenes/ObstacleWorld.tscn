@@ -41,6 +41,12 @@ script = ExtResource( 2 )
 [node name="SpeedBooster" parent="ObstacleContainer" instance=ExtResource( 1 )]
 position = Vector2( 326, 700 )
 
+[node name="SpeedBooster5" parent="ObstacleContainer" instance=ExtResource( 1 )]
+position = Vector2( 395, 1020 )
+
+[node name="SpeedBooster6" parent="ObstacleContainer" instance=ExtResource( 1 )]
+position = Vector2( 294, 973 )
+
 [node name="SpeedBooster2" parent="ObstacleContainer" instance=ExtResource( 1 )]
 position = Vector2( 224, 664 )
 

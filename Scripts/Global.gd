@@ -12,4 +12,5 @@ onready var laser_angle = 0
 func _ready() -> void:
 	obstacles = obstacle_scene.instance()
 	
-
+func game_over():
+	print("THIS IS IT, THE REAL GAME OVER")
