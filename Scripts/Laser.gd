@@ -26,9 +26,13 @@ var increased_speed = false
 func _ready() -> void:
 	velocity = velocity.rotated(deg2rad(global_rotation_degrees))
 	local_angle = $"/root/Global".laser_angle
+	$BlipNoise.play()
+	$"/root/Global".laser_fired = true
 
 
 func _physics_process(delta: float) -> void:
+	if $Timer.is_stopped():
+		$Timer.start()
 #	if current_pos_x == position.x:
 #		x_count += 1
 #	if current_pos_y == position.y:
@@ -46,10 +50,15 @@ func _physics_process(delta: float) -> void:
 #	velocity = velocity.rotated(global_rotation_degrees)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
+		# reset collision timer
+		#######################
+#		if "Laser" in collision_info.collider.name:
+#			return
 		velocity = velocity.bounce(collision_info.normal)
-		if collision_info.collider.name.left(12) == "SpeedBooster" and !increased_speed:
-			velocity = Vector2(0, speed + 1000)
-			increased_speed = true
+		if collision_info.collider.name.left(12) == "SpeedBooster":
+#			velocity = Vector2(0, speed + 1000)
+#			increased_speed = true
+			$Timer.stop()
 			$BlipNoise.play()
 	
 
@@ -75,4 +84,8 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 		rebounding = false
 		$"/root/Global".new_shot = 0
 #		$"/root/Global".difficulty += 1
+	queue_free()
+
+
+func _on_Timer_timeout():
 	queue_free()

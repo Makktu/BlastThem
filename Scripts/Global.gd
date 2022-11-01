@@ -1,5 +1,9 @@
 extends Node2D
 
+var first_run = true
+
+var shake_amount = 1
+
 onready var laser_fired = false
 
 onready var obstacle_scene = preload("res://Scenes/ObstacleWorld.tscn")
@@ -11,18 +15,20 @@ onready var laser_angle = 0
 
 var all_balls_gone = false
 
-var difficulty = 5
+var difficulty = 8
 
 var new_shot = 0
 
 func _ready() -> void:
 	obstacles = obstacle_scene.instance()
 	
-func game_over():
-	print("THIS IS IT, THE REAL GAME OVER")
 	
-func kaboom():
-	$BoxKiller.play()
+func kaboom(type = ""):
+	if type == "red":
+		$GreenBoxKiller.play()
+	else:
+		$BoxKiller.play()
+
 	
 #func check_all_balls():
 #	if !get_tree().root.get_child(0).has_node():

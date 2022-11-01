@@ -16,12 +16,6 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 5 )
 
-[node name="Light2D" type="Light2D" parent="Sprite"]
-texture = ExtResource( 3 )
-texture_scale = 1.27
-color = Color( 0.0470588, 0.894118, 0.835294, 1 )
-energy = 2.09
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 18 )
 
@@ -32,4 +26,14 @@ stream = ExtResource( 1 )
 volume_db = -24.618
 pitch_scale = 4.0
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 3 )
+texture_scale = 2.24
+energy = 9.12
+
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

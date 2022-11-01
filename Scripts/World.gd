@@ -2,6 +2,8 @@ extends Node2D
 
 var turn_one = true
 
+var shake_amount = 1
+
 var row_instance
 
 var blown_up = false
@@ -10,8 +12,19 @@ onready var dynamic_row = preload("res://Scenes/DynamicRow.tscn")
 
 var visible_rows = []
 
+	
+#func camera_shake(shake_amount = 10):
+#	$PlayerNode/Camera2D.set_offset(Vector2( \
+#		rand_range(-3.0, 3.0) * shake_amount, \
+#		rand_range(-3.0, 3.0) * shake_amount \
+#	))
+
 func _ready() -> void:
-	add_row()
+	for n in 8:
+		add_row()
+		move_down()
+	$"/root/Global".first_run = false
+
 	
 
 func add_row():
@@ -24,7 +37,9 @@ func add_row():
 func move_down():
 	# move everything down
 	for n in visible_rows:
-		n.position.y += 62
+		for p in 11:
+			yield(get_tree().create_timer(0.00005), "timeout")
+			n.position.y += 6
 	add_row()
 	if blown_up:
 		blown_up = false
