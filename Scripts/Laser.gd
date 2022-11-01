@@ -50,6 +50,7 @@ func _physics_process(delta: float) -> void:
 #	velocity = velocity.rotated(global_rotation_degrees)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
+#		$BlipNoise.play()
 		# reset collision timer
 		#######################
 #		if "Laser" in collision_info.collider.name:
@@ -59,7 +60,7 @@ func _physics_process(delta: float) -> void:
 #			velocity = Vector2(0, speed + 1000)
 #			increased_speed = true
 			$Timer.stop()
-			$BlipNoise.play()
+#			$BlipNoise.play()
 	
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -1,8 +1,40 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/explosion.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/SpeedBooster.gd" type="Script" id=2]
 [ext_resource path="res://icon2.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=20]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "rotate"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -7.0, 7.0, 0.0 ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27.5, 28 )
@@ -106,6 +138,10 @@ script = ExtResource( 2 )
 self_modulate = Color( 1, 0, 0.792157, 1 )
 texture = ExtResource( 3 )
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Box"]
+anims/RESET = SubResource( 20 )
+anims/rotate = SubResource( 21 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.5, 0 )
 shape = SubResource( 1 )
@@ -124,4 +160,8 @@ frames = SubResource( 19 )
 animation = "kaboom"
 frame = 1
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.6
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

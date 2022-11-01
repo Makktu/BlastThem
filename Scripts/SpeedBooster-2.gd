@@ -34,8 +34,6 @@ func _on_Area2D_body_entered(body: Node) -> void:
 				$Kaboom.play("kaboom")
 #				get_tree().get_root().get_node("World").camera_shake()
 				$Timer.start()
-				# testing testing and testing again – 2 - 3
-
 
 
 func _on_Timer_timeout():

@@ -11,6 +11,7 @@ radius = 46.5109
 [node name="Laser" type="KinematicBody2D"]
 position = Vector2( 242, 1247 )
 scale = Vector2( 0.19, 0.19 )
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
