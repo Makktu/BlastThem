@@ -17,6 +17,7 @@ script = ExtResource( 3 )
 [node name="LeftWall" type="StaticBody2D" parent="."]
 
 [node name="Mesh" type="MeshInstance2D" parent="LeftWall"]
+visible = false
 position = Vector2( 4, 647 )
 scale = Vector2( 10, 1280 )
 mesh = SubResource( 1 )
@@ -30,6 +31,7 @@ shape = SubResource( 2 )
 [node name="RightWall" type="StaticBody2D" parent="."]
 
 [node name="Mesh" type="MeshInstance2D" parent="RightWall"]
+visible = false
 position = Vector2( 717, 641 )
 scale = Vector2( 10, 1280 )
 mesh = SubResource( 1 )
@@ -43,6 +45,7 @@ shape = SubResource( 2 )
 [node name="TopWall" type="StaticBody2D" parent="."]
 
 [node name="Mesh" type="MeshInstance2D" parent="TopWall"]
+visible = false
 position = Vector2( 359, 2 )
 rotation = -3.14159
 scale = Vector2( 720, 10 )

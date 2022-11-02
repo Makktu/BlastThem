@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 func shoot():
 #	self.visible = false
 
-	for n in $"/root/Global".difficulty * ball_increaser:
+	for n in $"/root/Global".difficulty + ball_increaser:
 
 		# create local instance of the laser – **this is not on-screen yet**
 		var laser_instance = pl_laser_beam.instance()

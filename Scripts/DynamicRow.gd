@@ -20,8 +20,8 @@ func create_boxes():
 		var this_random_number = rng.randf_range(1, 10)
 		var new_box
 		if this_random_number < $"/root/Global".difficulty - 3:
-			var which_box = rng.randf_range(1, 5)
-			if which_box < 2:
+			var which_box = rng.randf_range(1, 10)
+			if which_box > 8:
 				new_box = alt_box.instance()
 			else:
 				new_box = obstacle_box.instance()	

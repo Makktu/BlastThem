@@ -10,36 +10,26 @@ script/source = "extends StaticBody2D
 var hits = 0
 var box_scale = Vector2()
 
+onready var explosion_radius = preload(\"res://Scenes/Explosion.tscn\")
+
 #func _ready():
 #	$Box/AnimationPlayer.play(\"rotate\")
 
 func _on_Area2D_body_entered(body: Node) -> void:
 		if \"Laser\" in body.name:
-#			$Area2D/CollisionShape2D.scale.x = 10
-#			$Area2D/CollisionShape2D.scale.y = 10
 			$\"/root/Global\".kaboom()
-#			$Kaboom.visible = true
-#			$Kaboom.scale.x = 13
-#			$Kaboom.scale.y = 13
-#			$Kaboom.play(\"kaboom\")
-#			yield(get_tree().create_timer(0.6), \"timeout\")
-#			queue_free()
 			hits += 1
-			scale.x += 0.005
-			scale.y += 0.005
-#			$Kaboom.visible = true
-#			$Kaboom.speed_scale = 4
-#			$Kaboom.play()
-#			yield(get_tree().create_timer(0.3), \"timeout\")
-#			$Kaboom.speed_scale = 1
-#			$Kaboom.visible = false
+			print(\"BOMB\", hits)
+			if hits < 5:
+				scale.x += 0.02
+				scale.y += 0.02
 			if hits > 5:
-				$\"/root/Global\".kaboom(\"red\")
+				var new_explosion = explosion_radius.instance()
+				add_child(new_explosion)
+				$\"/root/Global\".kaboom()
 				$Kaboom.visible = true
-				$Kaboom.scale.x = 4
-				$Kaboom.scale.y = 4
 				$Kaboom.play(\"kaboom\")
-#				get_tree().get_root().get_node(\"World\").camera_shake()
+				$Bomb.visible = false
 				$Timer.start()
 
 
@@ -151,7 +141,6 @@ texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -40, 60 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 21 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -163,13 +152,13 @@ shape = SubResource( 22 )
 [node name="Kaboom" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 10, 1 )
-scale = Vector2( 20, 20 )
+scale = Vector2( 30, 30 )
 frames = SubResource( 19 )
 animation = "kaboom"
 frame = 1
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 0.2
 
 [node name="BombFuse" parent="." instance=ExtResource( 2 )]
 position = Vector2( 410, -270 )

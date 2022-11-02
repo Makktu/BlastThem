@@ -20,9 +20,9 @@ var visible_rows = []
 #	))
 
 func _ready() -> void:
-	for n in 8:
+	for n in 2:
 		add_row()
-		move_down()
+	move_down()
 	$"/root/Global".first_run = false
 
 	
@@ -37,7 +37,7 @@ func add_row():
 func move_down():
 	# move everything down
 	for n in visible_rows:
-		for p in 11:
+		for p in 10:
 			yield(get_tree().create_timer(0.00005), "timeout")
 			n.position.y += 6
 	add_row()

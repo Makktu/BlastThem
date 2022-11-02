@@ -26,6 +26,10 @@ window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 
+[global]
+
+render=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
@@ -44,5 +48,5 @@ common/enable_pause_aware_picking=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.0352941, 0.0352941, 0.0352941, 1 )
+environment/default_clear_color=Color( 0.0117647, 0.0392157, 0.211765, 1 )
 environment/default_environment="res://default_env.tres"
