@@ -7,7 +7,7 @@ var box_scale = Vector2()
 #	$Box/AnimationPlayer.play("rotate")
 
 func _on_Area2D_body_entered(body: Node) -> void:
-		if "Laser" in body.name or "Explosion" in body.name:
+		if "Laser" in body.name or "Booster-2" in body.name:
 			print(body.name)
 			$"/root/Global".kaboom()
 			hits += 1

@@ -12,17 +12,11 @@ onready var dynamic_row = preload("res://Scenes/DynamicRow.tscn")
 
 var visible_rows = []
 
-	
-#func camera_shake(shake_amount = 10):
-#	$PlayerNode/Camera2D.set_offset(Vector2( \
-#		rand_range(-3.0, 3.0) * shake_amount, \
-#		rand_range(-3.0, 3.0) * shake_amount \
-#	))
 
 func _ready() -> void:
 	for n in 2:
 		add_row()
-	move_down()
+		move_down()
 	$"/root/Global".first_run = false
 
 	
@@ -45,7 +39,7 @@ func move_down():
 		blown_up = false
 #	$RowBoom.play()
 
-func blow_shit_up():
+func blow_them_up():
 	var blown_up = visible_rows[0]
 	blown_up.queue_free()
 	blown_up = true
@@ -54,5 +48,5 @@ func blow_shit_up():
 func _unhandled_input(event):
 	if Input.is_action_pressed("ui_cancel"):
 		if !blown_up:
-			blow_shit_up()
+			blow_them_up()
 

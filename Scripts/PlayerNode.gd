@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 
-var ball_increaser = 1
+var balls_allowed = 5
+var turns_balls_boosted = 0
 
 func get_input():	
 	if Input.is_action_pressed("ui_left"):
@@ -25,8 +26,15 @@ func _physics_process(delta: float) -> void:
 	
 func shoot():
 #	self.visible = false
+	if $"/root/Global".balls_boosted:
+		balls_allowed += $"/root/Global".ball_boost
+		turns_balls_boosted += 1
+		if turns_balls_boosted == 3:
+			turns_balls_boosted = 0
+			$"/root/Global".balls_boosted = false
+			balls_allowed = 5
 
-	for n in $"/root/Global".difficulty + ball_increaser:
+	for n in balls_allowed:
 
 		# create local instance of the laser – **this is not on-screen yet**
 		var laser_instance = pl_laser_beam.instance()
@@ -42,5 +50,5 @@ func shoot():
 	#	get_tree().root.get_child(0).add_child(laser_instance)
 		get_parent().add_child(laser_instance)
 		yield(get_tree().create_timer(0.075), "timeout")
-
-	ball_increaser += 1
+		
+	$"/root/Global".laser_fired = false

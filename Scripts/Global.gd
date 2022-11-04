@@ -15,7 +15,10 @@ onready var laser_angle = 0
 
 var all_balls_gone = false
 
-var difficulty = 8
+var difficulty = 7
+var turn = 1
+var ball_boost = 10
+var balls_boosted = false
 
 var new_shot = 0
 

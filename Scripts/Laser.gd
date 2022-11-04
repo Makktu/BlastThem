@@ -33,34 +33,13 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if $Timer.is_stopped():
 		$Timer.start()
-#	if current_pos_x == position.x:
-#		x_count += 1
-#	if current_pos_y == position.y:
-#		y_count += 1
-#
-#	if x_count > 3:
-#		position.x += 10
-#		x_count = 0
-#	if y_count > 3:
-#		position.y -= 10
-#		y_count = 0
-	
 	current_pos_x = position.x
 	current_pos_y = position.y
-#	velocity = velocity.rotated(global_rotation_degrees)
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-#		$BlipNoise.play()
-		# reset collision timer
-		#######################
-#		if "Laser" in collision_info.collider.name:
-#			return
 		velocity = velocity.bounce(collision_info.normal)
 		if collision_info.collider.name.left(12) == "SpeedBooster":
-#			velocity = Vector2(0, speed + 1000)
-#			increased_speed = true
 			$Timer.stop()
-#			$BlipNoise.play()
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -71,14 +50,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
-#	$"/root/Global".check_all_balls()
-#	if !$"/root/Global".all_balls_gone:
-#		return
 	$"/root/Global".new_shot += 1
-	print("GONE")
 	if $"/root/Global".new_shot == $"/root/Global".difficulty:
-			
-
 		$"/root/Global".laser_fired = false
 	#	$"/root/Global".move_obstacles("down")
 		get_parent().move_down()
