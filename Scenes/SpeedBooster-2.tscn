@@ -24,7 +24,8 @@ func _on_Area2D_body_entered(body: Node) -> void:
 				$Kaboom.play(\"kaboom\")
 				$Bomb.visible = false
 				$Timer.start()
-				$\"/root/Global\".balls_boosted = true
+				if $\"/root/Global\".balls_boosted == false:
+					$\"/root/Global\".balls_boosted = true
 
 
 

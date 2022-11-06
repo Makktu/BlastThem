@@ -4,6 +4,8 @@ const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 
 var balls_allowed = 5
 var turns_balls_boosted = 0
+var shoot_delay = 0.3
+var boosted_shoot_delay = 0.1
 
 func get_input():	
 	if Input.is_action_pressed("ui_left"):
@@ -27,11 +29,13 @@ func _physics_process(delta: float) -> void:
 func shoot():
 #	self.visible = false
 	if $"/root/Global".balls_boosted:
+		shoot_delay = boosted_shoot_delay
 		balls_allowed += $"/root/Global".ball_boost
 		turns_balls_boosted += 1
-		if turns_balls_boosted == 3:
+		if turns_balls_boosted == 4:
 			turns_balls_boosted = 0
 			$"/root/Global".balls_boosted = false
+			shoot_delay = 0.3
 			balls_allowed = 5
 
 	for n in balls_allowed:
@@ -47,8 +51,7 @@ func shoot():
 		$"/root/Global".laser_angle = global_rotation_degrees
 		
 		# now the laser is added to the scene at the correct place and at the correct rotation angle
-	#	get_tree().root.get_child(0).add_child(laser_instance)
 		get_parent().add_child(laser_instance)
-		yield(get_tree().create_timer(0.075), "timeout")
+		yield(get_tree().create_timer(shoot_delay), "timeout")
 		
 	$"/root/Global".laser_fired = false

@@ -9,6 +9,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	create_boxes()
 	
+	
 func create_boxes():	
 	var box_x = 0
 	var box_y = 5

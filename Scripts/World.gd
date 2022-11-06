@@ -34,10 +34,12 @@ func move_down():
 		for p in 10:
 			yield(get_tree().create_timer(0.00005), "timeout")
 			n.position.y += 6
+		
+
 	add_row()
 	if blown_up:
 		blown_up = false
-#	$RowBoom.play()
+	$RowBoom.play()
 
 func blow_them_up():
 	var blown_up = visible_rows[0]
@@ -49,4 +51,8 @@ func _unhandled_input(event):
 	if Input.is_action_pressed("ui_cancel"):
 		if !blown_up:
 			blow_them_up()
+			
+
+func world_button():
+	print("ALL OVER THE WORLD")
 
