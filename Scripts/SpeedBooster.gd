@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends KinematicBody2D
 
 var hits = 0
 var box_scale = Vector2()
@@ -7,6 +7,7 @@ var box_scale = Vector2()
 #	$Box/AnimationPlayer.play("rotate")
 
 func _on_Area2D_body_entered(body: Node) -> void:
+
 		if "Laser" in body.name:
 #			$Area2D/CollisionShape2D.scale.x = 10
 #			$Area2D/CollisionShape2D.scale.y = 10
@@ -27,6 +28,8 @@ func _on_Area2D_body_entered(body: Node) -> void:
 #			$Kaboom.speed_scale = 1
 #			$Kaboom.visible = false
 			if hits > 2:
+				$CollisionShape2D.set_deferred("disabled", true)
+				$Area2D/CollisionShape2D.set_deferred("disabled", true)
 				$"/root/Global".kaboom("red")
 				$Kaboom.visible = true
 				$Kaboom.scale.x = 4
@@ -39,4 +42,10 @@ func _on_Area2D_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
+	$"/root/Global".player_score += 1
 	queue_free()
+
+
+func _on_Area2D_area_entered(area: Area2D) -> void:
+		if "GameOverLine" in area.name:
+			$"/root/Global".game_over()

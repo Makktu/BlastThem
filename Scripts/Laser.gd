@@ -50,14 +50,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
-	$"/root/Global".new_shot += 1
-	if $"/root/Global".new_shot == $"/root/Global".difficulty:
+	$"/root/Global".new_shot += 1			
+	if $"/root/Global".new_shot >= $"/root/Global".balls_allowed:
 		$"/root/Global".laser_fired = false
-	#	$"/root/Global".move_obstacles("down")
-		get_parent().move_down()
+		if !$"/root/Global".balls_boosted and !$"/root/Global".moved_down:
+			get_parent().move_down()
+			$"/root/Global".moved_down = true
 		rebounding = false
 		$"/root/Global".new_shot = 0
-#		$"/root/Global".difficulty += 1
 	queue_free()
 
 

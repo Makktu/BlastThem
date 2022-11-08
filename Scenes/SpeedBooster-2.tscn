@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Assets/bomb.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/BombFuse.tscn" type="PackedScene" id=2]
@@ -19,17 +19,21 @@ func _on_Area2D_body_entered(body: Node) -> void:
 				scale.x += 0.01
 				scale.y += 0.01
 			if hits > 5:
+				$CollisionShape2D.set_deferred(\"disabled\", true)
+				$Area2D/CollisionShape2D.set_deferred(\"disabled\", true)
 				$\"/root/Global\".kaboom()
 				$Kaboom.visible = true
 				$Kaboom.play(\"kaboom\")
 				$Bomb.visible = false
 				$Timer.start()
-				if $\"/root/Global\".balls_boosted == false:
-					$\"/root/Global\".balls_boosted = true
+
 
 
 
 func _on_Timer_timeout():
+	if $\"/root/Global\".balls_boosted == false:
+		$\"/root/Global\".balls_boosted = true
+	$\"/root/Global\".player_score += 3
 	queue_free()
 
 "
@@ -128,9 +132,6 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[sub_resource type="CircleShape2D" id=23]
-radius = 1353.7
-
 [node name="SpeedBooster-2" type="StaticBody2D"]
 scale = Vector2( 0.1, 0.1 )
 script = SubResource( 20 )
@@ -162,14 +163,6 @@ wait_time = 0.3
 [node name="BombFuse" parent="." instance=ExtResource( 2 )]
 position = Vector2( 410, -270 )
 scale = Vector2( 60, 90 )
-
-[node name="ExplosionCollision" type="Area2D" parent="."]
-visible = false
-
-[node name="ExplColl" type="CollisionShape2D" parent="ExplosionCollision"]
-visible = false
-position = Vector2( -40, 50 )
-shape = SubResource( 23 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

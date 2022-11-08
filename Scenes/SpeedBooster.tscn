@@ -98,7 +98,7 @@ animations = [ {
 "speed": 15.0
 } ]
 
-[node name="SpeedBooster-2" type="StaticBody2D"]
+[node name="SpeedBooster-2" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Box" type="Sprite" parent="."]
@@ -123,7 +123,8 @@ animation = "kaboom"
 frame = 1
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 0.3
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
