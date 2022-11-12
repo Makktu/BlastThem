@@ -17,6 +17,7 @@ extents = Vector2( 396.593, 8.5 )
 script = ExtResource( 3 )
 
 [node name="PlayerNode" parent="." instance=ExtResource( 1 )]
+position = Vector2( 360, 1000 )
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 
@@ -68,7 +69,7 @@ stream = ExtResource( 2 )
 position = Vector2( 3, 3 )
 
 [node name="GameOverLine" type="Area2D" parent="."]
-position = Vector2( 0, 270 )
+position = Vector2( -2, 100 )
 
 [node name="LoseLine" type="CollisionShape2D" parent="GameOverLine"]
 position = Vector2( 361, 833 )
