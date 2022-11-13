@@ -7,6 +7,8 @@ var shoot_delay = 0.3
 var boosted_shoot_delay = 0.1
 
 func get_input():	
+	if $"/root/Global".game_is_over:
+		return
 	if Input.is_action_pressed("ui_left"):
 		if rotation_degrees > -80:
 			rotation_degrees -= 1

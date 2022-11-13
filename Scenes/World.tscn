@@ -69,7 +69,7 @@ stream = ExtResource( 2 )
 position = Vector2( 3, 3 )
 
 [node name="GameOverLine" type="Area2D" parent="."]
-position = Vector2( -2, 100 )
+position = Vector2( -1, -352 )
 
 [node name="LoseLine" type="CollisionShape2D" parent="GameOverLine"]
 position = Vector2( 361, 833 )

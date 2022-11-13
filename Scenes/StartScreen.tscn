@@ -1,11 +1,64 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Assets/Andika-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://StartScreen.gd" type="Script" id=2]
+[ext_resource path="res://Assets/BlastThemLogo.png" type="Texture" id=3]
+[ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Scenes/START.gd" type="Script" id=5]
 
-[sub_resource type="DynamicFont" id=1]
-size = 90
-font_data = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("../START:custom_styles/normal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ SubResource( 3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../START:custom_styles/normal:bg_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.909804, 0.819608, 0.0980392, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "buttonflash"
+length = 0.75
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("../START:custom_styles/normal:bg_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.00392157, 0.764706, 0.862745, 1 ), Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0.00392157, 0.764706, 0.862745, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 4 )
 
 [node name="StartScreen" type="Node2D"]
 script = ExtResource( 2 )
@@ -18,26 +71,33 @@ margin_bottom = 1297.0
 color = Color( 0.909804, 0.819608, 0.0980392, 1 )
 
 [node name="START" type="Button" parent="BGContainer"]
-margin_left = 286.0
-margin_top = 539.0
-margin_right = 431.0
-margin_bottom = 608.0
+margin_left = 169.0
+margin_top = 611.0
+margin_right = 569.0
+margin_bottom = 711.0
+custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_fonts/font = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 text = "START"
+script = ExtResource( 5 )
 
-[node name="Button" type="Button" parent="BGContainer"]
-margin_left = 291.0
-margin_top = 809.0
-margin_right = 436.0
-margin_bottom = 878.0
-text = "SOMETHING ELSE"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BGContainer/START"]
+root_node = NodePath("../../Title")
+anims/RESET = SubResource( 4 )
+anims/buttonflash = SubResource( 5 )
 
-[node name="TITLE" type="RichTextLabel" parent="BGContainer"]
-margin_left = 71.0
-margin_top = 326.0
-margin_right = 671.0
-margin_bottom = 526.0
-custom_colors/default_color = Color( 0.909804, 0.0352941, 0.0352941, 1 )
-custom_fonts/normal_font = SubResource( 1 )
-text = "BLAST THEM!"
+[node name="BestScore" type="Label" parent="BGContainer"]
+margin_left = 218.0
+margin_top = 811.0
+margin_right = 626.0
+margin_bottom = 843.0
+custom_colors/font_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Best Score"
+
+[node name="Title" type="Sprite" parent="BGContainer"]
+position = Vector2( 355, 391 )
+scale = Vector2( 1.27086, 3.17685 )
+texture = ExtResource( 3 )
 
 [connection signal="pressed" from="BGContainer/START" to="." method="_on_START_pressed"]
