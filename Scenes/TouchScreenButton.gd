@@ -12,7 +12,7 @@ func _ready():
 	
 func get_swipe_direction(swipe, swipe_margin):
 	var swipe_direction = Vector2.ZERO
-	print(swipe.x, " > ", swipe.y)
+
 	
 #	if swipe.x >= -swipe_margin and swipe.x <= swipe_margin and swipe.y >= swipe_margin:
 #		swipe_direction = Vector2.DOWN

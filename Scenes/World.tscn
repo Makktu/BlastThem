@@ -23,7 +23,7 @@ script = ExtResource( 3 )
 position = Vector2( -48, 74 )
 scale = Vector2( 40, 60 )
 shape = SubResource( 4 )
-action = "fire_button"
+action = "the_finger"
 script = ExtResource( 5 )
 
 [node name="PlayerNode" parent="." instance=ExtResource( 1 )]
@@ -85,8 +85,3 @@ position = Vector2( -2, 87 )
 position = Vector2( 361, 833 )
 scale = Vector2( 0.879996, 1 )
 shape = SubResource( 3 )
-
-[node name="TouchScreenLayer" type="CanvasLayer" parent="."]
-visible = false
-scale = Vector2( 360, 1280 )
-transform = Transform2D( 360, 0, 0, 1280, 0, 0 )

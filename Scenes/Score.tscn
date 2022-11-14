@@ -32,7 +32,7 @@ margin_left = 348.0
 margin_top = 21.0
 margin_right = 756.0
 margin_bottom = 71.0
-custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_colors/font_color = Color( 0.254902, 0.909804, 0.0980392, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "Best:"
 
@@ -41,6 +41,6 @@ margin_left = 172.0
 margin_top = 2.0
 margin_right = 580.0
 margin_bottom = 42.0
-custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_colors/font_color = Color( 0.254902, 0.909804, 0.0980392, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "0"

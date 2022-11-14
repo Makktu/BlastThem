@@ -4,9 +4,12 @@ const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 
 onready var Swipe = $"../SwipeScreenButton"
 
-var finger_moving = false
+var finger_on = false
 var shoot_delay = 0.3
 var boosted_shoot_delay = 0.1
+
+var is_drag = false
+var is_touch = false
 
 # initialise swipe control variables
 #var swipe_up = false
@@ -31,7 +34,6 @@ func get_input():
 			rotation_degrees += 1	
 			
 	if Input.is_action_pressed("ui_up") or swipe_left_released or swipe_right_released:
-		print($"/root/Global".laser_fired)
 		if !$"/root/Global".laser_fired:
 			$"/root/Global".laser_fired = true
 			$"/root/Global".moved_down = false
@@ -45,43 +47,48 @@ func get_input():
 func _input(event):
 #	if event is InputEventScreenTouch and event.is_pressed():
 #		print("HOLD....")
-
-		
 	if event is InputEventScreenDrag:
-#		if event.speed.x < 4:
-#			return
-#		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.UP:
-#			swipe_down = true
-#		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.DOWN:
-#			swipe_up = true
-		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
+		is_drag = true
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT and is_drag:
 			if swipe_left:
 				swipe_left = false
 			swipe_right = true
 
-		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT:
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT and is_drag:
 			if swipe_right:
 				swipe_right = false
 			swipe_left = true
 
-
-#	if Swipe.on_area == false && swipe_down == true:
-#		swipe_down_released = true
-#		swipe_down = false
-#	if Swipe.on_area == false && swipe_up == true:
-#		swipe_up_released = true
-#		swipe_up = false
 	if Swipe.on_area == false && swipe_left == true:
+		is_drag = false
 		swipe_left_released = true
+		finger_on = false
 		swipe_left = false
 	if Swipe.on_area == false && swipe_right == true:
+		is_drag = false
 		swipe_right_released = true
+		finger_on = false
 		swipe_right = false	
+		
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			is_touch = true
+			shoot()
+			print("TAP")
+		
+#	if event is InputEventScreenTouch and event != InputEventScreenDrag and event.is_pressed():
+#		shoot()
+#		print("Hello")
+
 		
 
 
 	
 func _physics_process(delta: float) -> void:
+	if $"/root/Global".balls_boosted:		
+		$AnimationPlayer.play("balls_boosted")
+	if !$"/root/Global".balls_boosted:
+		$AnimationPlayer.stop()
 	get_input()
 	
 	
