@@ -4,7 +4,7 @@ const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 
 onready var Swipe = $"../SwipeScreenButton"
 
-
+var finger_moving = false
 var shoot_delay = 0.3
 var boosted_shoot_delay = 0.1
 
@@ -43,7 +43,13 @@ func get_input():
 			
 
 func _input(event):
+#	if event is InputEventScreenTouch and event.is_pressed():
+#		print("HOLD....")
+
+		
 	if event is InputEventScreenDrag:
+#		if event.speed.x < 4:
+#			return
 #		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.UP:
 #			swipe_down = true
 #		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.DOWN:
@@ -71,6 +77,8 @@ func _input(event):
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
 		swipe_right = false	
+		
+
 
 	
 func _physics_process(delta: float) -> void:

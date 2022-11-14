@@ -23,6 +23,7 @@ script = ExtResource( 3 )
 position = Vector2( -48, 74 )
 scale = Vector2( 40, 60 )
 shape = SubResource( 4 )
+action = "fire_button"
 script = ExtResource( 5 )
 
 [node name="PlayerNode" parent="." instance=ExtResource( 1 )]
