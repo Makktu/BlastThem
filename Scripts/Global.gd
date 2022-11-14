@@ -9,13 +9,23 @@ var first_run = true
 var obstacles = null
 var moved_down = false
 var all_balls_gone = false
+
 var player_score = 0
 var best_score = 0
+var best_score_beaten = false
+
 var bomb_likelihood = 2
 var balls_boosted = false
 var balls_allowed = 5
 var new_shot = 0
 
+var user_OS = OS.get_name()
+
+func _ready() -> void:
+	print(user_OS)
+	# 💥💥>>>>>>> WHEN TOUCHSCREEN IS IMPLEMENTED
+	# >>>>>>> WILL NEED TO SEPARATE CONTROL SCHEMES
+	# >>>>>>> BETWEEN TOUCHSCREEN AND KEYBOARD - HERE!
 	
 func kaboom(type = ""):
 	if type == "red":
@@ -24,31 +34,36 @@ func kaboom(type = ""):
 		$BoxKiller.play()
 		
 func game_over():
-	
 	# interrupt all actions
 	game_is_over = true
 	
-	# check if best score is new
-	# acknowledge if so
-	# and update all variables
-	# here
+	if !best_score_beaten:
+		$GameOverSound.play()
 	
-	# fade the screen
-	# and show the play again button
+	if best_score_beaten:
+		$CanvasLayer/GameOverFade/NewBestScore.visible = true
+		$BestScoreTune.play()
+	
 	game_over_fade()
-	$GameOverFade.visible = true
-	$GameOverFade/PlayAgain.visible = true
+	
+	$FadeTimer.start()
+
 	
 	
 func game_over_fade():
-	# this is not working
-	for n in 125:
-		$GameOverFade.self_modulate.a = n
-		yield(get_tree().create_timer(0.5), "timeout")	
+	$CanvasLayer.visible = true
+	$CanvasLayer/GameOverFade/AnimationPlayer.play("game_over")
 		
 		
 func _on_PlayAgain_pressed() -> void:
 	game_is_over = false
-	$GameOverFade.visible = false
-	$GameOverFade/PlayAgain.visible = false
+	$CanvasLayer.visible = false
+	$CanvasLayer/GameOverFade/PlayAgain.visible = false
+	if best_score_beaten:
+		$CanvasLayer/GameOverFade/NewBestScore.visible = false
+		best_score_beaten = false
 	get_tree().change_scene("res://Scenes/World.tscn")
+
+
+func _on_FadeTimer_timeout() -> void:
+	$CanvasLayer/GameOverFade/PlayAgain.visible = true

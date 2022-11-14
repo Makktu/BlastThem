@@ -2,7 +2,6 @@ extends Node2D
 
 onready var obstacle_box = preload("res://Scenes/SpeedBooster.tscn")
 onready var alt_box = preload("res://Scenes/SpeedBooster-2.tscn")
-#onready var alt_box = preload("res://Scenes/AltBox.tscn")
 
 var rng = RandomNumberGenerator.new()
 

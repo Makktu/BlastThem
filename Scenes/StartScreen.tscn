@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://Assets/game_start_music.ogg" type="AudioStream" id=1]
 [ext_resource path="res://StartScreen.gd" type="Script" id=2]
 [ext_resource path="res://Assets/BlastThemLogo.png" type="Texture" id=3]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
@@ -9,7 +10,10 @@
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
 
 [sub_resource type="Animation" id=4]
@@ -24,7 +28,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ SubResource( 3 ) ]
+"values": [ SubResource( 8 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("../START:custom_styles/normal:bg_color")
@@ -41,7 +45,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "buttonflash"
-length = 0.75
+length = 1.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("../START:custom_styles/normal:bg_color")
@@ -50,14 +54,18 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
+"times": PoolRealArray( 0, 0.8, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.00392157, 0.764706, 0.862745, 1 ), Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0.00392157, 0.764706, 0.862745, 1 ) ]
+"values": [ Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0.00392157, 0.764706, 0.862745, 0.521569 ), Color( 0.909804, 0.819608, 0.0980392, 1 ) ]
 }
 
 [sub_resource type="DynamicFont" id=6]
-size = 32
+size = 40
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
 font_data = ExtResource( 4 )
 
 [node name="StartScreen" type="Node2D"]
@@ -68,16 +76,17 @@ script = ExtResource( 2 )
 [node name="ColorRect" type="ColorRect" parent="BGContainer"]
 margin_right = 725.0
 margin_bottom = 1297.0
-color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+color = Color( 0.00392157, 0.764706, 0.862745, 1 )
 
 [node name="START" type="Button" parent="BGContainer"]
 margin_left = 169.0
 margin_top = 611.0
 margin_right = 569.0
 margin_bottom = 711.0
-custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_colors/font_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
 custom_fonts/font = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
 text = "START"
 script = ExtResource( 5 )
 
@@ -87,17 +96,43 @@ anims/RESET = SubResource( 4 )
 anims/buttonflash = SubResource( 5 )
 
 [node name="BestScore" type="Label" parent="BGContainer"]
-margin_left = 218.0
-margin_top = 811.0
-margin_right = 626.0
-margin_bottom = 843.0
-custom_colors/font_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+margin_left = 162.0
+margin_top = 912.0
+margin_right = 570.0
+margin_bottom = 952.0
+custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "Best Score"
 
+[node name="BestScore" type="Label" parent="BGContainer/BestScore"]
+margin_left = 132.0
+margin_top = 54.0
+margin_right = 540.0
+margin_bottom = 86.0
+custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "0"
+
 [node name="Title" type="Sprite" parent="BGContainer"]
-position = Vector2( 355, 391 )
-scale = Vector2( 1.27086, 3.17685 )
+position = Vector2( 356, 391 )
+scale = Vector2( 1.25, 3 )
 texture = ExtResource( 3 )
 
+[node name="74apps" type="Label" parent="BGContainer"]
+margin_left = 230.0
+margin_top = 1248.0
+margin_right = 638.0
+margin_bottom = 1288.0
+custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_fonts/font = SubResource( 9 )
+text = "74apps.org"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+
+[node name="TitleTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="pressed" from="BGContainer/START" to="." method="_on_START_pressed"]
+[connection signal="timeout" from="TitleTimer" to="." method="_on_TitleTimer_timeout"]

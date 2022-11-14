@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "TouchScreenButton",
+"class": "SwipeScreenButton",
+"language": "GDScript",
+"path": "res://Scenes/TouchScreenButton.gd"
+} ]
+_global_script_class_icons={
+"SwipeScreenButton": ""
+}
+
 [application]
 
 config/name="Lightz"
@@ -33,6 +43,10 @@ render=false
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 

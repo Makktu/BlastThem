@@ -19,7 +19,9 @@ func _ready() -> void:
 	for n in 2:
 		add_row()
 		move_down()
+	$"/root/Global".balls_boosted = false
 	$"/root/Global".first_run = false
+	$"/root/Global".player_score = 0
 	local_score = $"/root/Global".player_score
 
 	
@@ -29,7 +31,6 @@ func add_row():
 	add_child(row_instance)
 	# add the newly created row to the all-rows array
 	visible_rows.append(row_instance)
-	print(visible_rows.size())
 
 		
 func move_down():
@@ -62,3 +63,4 @@ func _physics_process(delta):
 		if local_score > $"/root/Global".best_score:
 			$"/root/Global".best_score = local_score
 			$Score.update_best_score(local_score)
+			$"/root/Global".best_score_beaten = true

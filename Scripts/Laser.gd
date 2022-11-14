@@ -50,7 +50,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
-	$"/root/Global".new_shot += 1			
+#	if $"res://Scenes/Laser.tscn".is_inside_tree():
+#		return
+	$"/root/Global".new_shot += 1	
 	if $"/root/Global".new_shot >= $"/root/Global".balls_allowed:
 		$"/root/Global".laser_fired = false
 		if !$"/root/Global".balls_boosted and !$"/root/Global".moved_down:
