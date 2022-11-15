@@ -7,13 +7,6 @@ var current_pos_y
 var x_count = 0
 var y_count = 0
 
-#
-#var speed = Vector2(max(move_speed, direction_distance), 0)
-#speed = speed.rotated(global_rotation)
-#move_and_slide(speed)
-
-
-
 var rebounding = false
 
 var local_angle
@@ -50,18 +43,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_VisibilityNotifier2D_screen_exited() -> void:
-#	if $"res://Scenes/Laser.tscn".is_inside_tree():
-#		return
 	$"/root/Global".new_shot += 1	
 	if $"/root/Global".new_shot >= $"/root/Global".balls_allowed:
 		$"/root/Global".laser_fired = false
+		$"/root/Global".balls_allowed = 5
 		if !$"/root/Global".balls_boosted and !$"/root/Global".moved_down:
 			get_parent().move_down()
-			if $"/root/Global".player_score > 100:
-				get_parent().move_down()
 			if $"/root/Global".player_score > 200:
 				get_parent().move_down()
+#			if $"/root/Global".player_score > 200:
+#				get_parent().move_down()
 			$"/root/Global".moved_down = true
+			$"/root/Global".balls_allowed = 5
+			$"/root/Global".balls_boosted = false
+			$"/root/Global".shoot_delay = 0.3
+#			$"/root/Global".laser_fired = false
 		rebounding = false
 		$"/root/Global".new_shot = 0
 	queue_free()

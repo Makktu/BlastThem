@@ -26,8 +26,9 @@ func create_boxes():
 		var new_box
 		var which_box = rng.randf_range(1, 20)
 		var box_filled = false
-		if which_box > 18:
+		if which_box > 19 and $"/root/Global".player_score > 50 and !$"/root/Global".diamond_on_screen:
 			new_box = diamond.instance()
+			$"/root/Global".diamond_on_screen = true
 			box_filled = true
 		elif which_box > 16 or full_row:
 			new_box = redbrick.instance()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://icon2.png" type="Texture" id=1]
+[ext_resource path="res://Assets/icon2.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/SpeedBooster.gd" type="Script" id=2]
 [ext_resource path="res://Assets/explosion.png" type="Texture" id=3]
 

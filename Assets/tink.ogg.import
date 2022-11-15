@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/tink.ogg-ab50ae88f6228ae8d14b5f312e8b1b3c.oggstr"
+
+[deps]
+
+source_file="res://Assets/tink.ogg"
+dest_files=[ "res://.import/tink.ogg-ab50ae88f6228ae8d14b5f312e8b1b3c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

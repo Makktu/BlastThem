@@ -10,14 +10,19 @@ var obstacles = null
 var moved_down = false
 var all_balls_gone = false
 
+
 var player_score = 0
 var best_score = 0
 var best_score_beaten = false
 
+var diamond_on_screen = false
 var bomb_likelihood = 2
 var balls_boosted = false
 var balls_allowed = 5
 var new_shot = 0
+var shoot_delay = 0.3
+
+var diamond_shot = false
 
 var user_OS = OS.get_name()
 

@@ -5,7 +5,6 @@ const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 onready var Swipe = $"../SwipeScreenButton"
 
 var finger_on = false
-var shoot_delay = 0.3
 var boosted_shoot_delay = 0.1
 
 var is_drag = false
@@ -24,6 +23,10 @@ var swipe_right_released = false
 
 func _ready() -> void:
 	$"/root/Global".laser_fired = false
+	$"/root/Global".balls_boosted = false
+	$"/root/Global".balls_allowed = 5
+	$"/root/Global".shoot_delay = 0.3
+	$"/root/Global".diamond_on_screen = false
 
 func get_input():	
 	if $"/root/Global".game_is_over:
@@ -97,13 +100,17 @@ func _physics_process(delta: float) -> void:
 	
 func shoot():
 #	self.visible = false
-	var local_balls = 5
 	if $"/root/Global".balls_boosted:
-		local_balls = 15
 		$"/root/Global".balls_allowed = 15
-		shoot_delay = 0.1
+		$"/root/Global".shoot_delay = 0.1
+		$"/root/Global".balls_boosted = false
+	
+	if $"/root/Global".diamond_shot:
+		$"/root/Global".balls_allowed = 40
+		$"/root/Global".shoot_delay = 0.05
+		$"/root/Global".diamond_shot = false
 		
-	for n in local_balls:
+	for n in $"/root/Global".balls_allowed:
 
 		# create local instance of the laser – **this is not on-screen yet**
 		var laser_instance = pl_laser_beam.instance()
@@ -117,12 +124,4 @@ func shoot():
 		
 		# now the laser is added to the scene at the correct place and at the correct rotation angle
 		get_parent().add_child(laser_instance)
-		yield(get_tree().create_timer(shoot_delay), "timeout")
-		
-	
-	
-	if $"/root/Global".balls_boosted:
-		$"/root/Global".balls_allowed = 5
-		$"/root/Global".balls_boosted = false
-		local_balls = 5
-		shoot_delay = 0.3
+		yield(get_tree().create_timer($"/root/Global".shoot_delay), "timeout")
