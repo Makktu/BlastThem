@@ -57,9 +57,9 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 		$"/root/Global".laser_fired = false
 		if !$"/root/Global".balls_boosted and !$"/root/Global".moved_down:
 			get_parent().move_down()
-			if $"/root/Global".player_score > 50:
-				get_parent().move_down()
 			if $"/root/Global".player_score > 100:
+				get_parent().move_down()
+			if $"/root/Global".player_score > 200:
 				get_parent().move_down()
 			$"/root/Global".moved_down = true
 		rebounding = false

@@ -134,6 +134,7 @@ animations = [ {
 
 [node name="SpeedBooster-2" type="StaticBody2D"]
 scale = Vector2( 0.1, 0.1 )
+z_index = 10
 script = SubResource( 20 )
 
 [node name="Bomb" type="Sprite" parent="."]

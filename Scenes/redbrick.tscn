@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/SpeedBooster.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/yellowbrick.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+var hits = 0
+var box_scale = Vector2()
+
+#func _ready():
+#	$Box/AnimationPlayer.play(\"rotate\")
+
+## and now?
+
+func _on_Area2D_body_entered(body: Node) -> void:
+		if \"Laser\" in body.name:
+			$\"/root/Global\".kaboom()
+			hits += 1
+			scale.x -= 0.1
+			scale.y -= 0.1
+			if hits > 3:
+				$CollisionShape2D.set_deferred(\"disabled\", true)
+				$Area2D/CollisionShape2D.set_deferred(\"disabled\", true)
+				$\"/root/Global\".kaboom(\"red\")
+				$Kaboom.visible = true
+				$Kaboom.scale.x = 4
+				$Kaboom.scale.y = 4
+				$Kaboom.play(\"kaboom\")
+				$Timer.start()
+
+
+func _on_Timer_timeout():
+	$\"/root/Global\".player_score += 1
+	queue_free()
+
+
+func _on_Area2D_area_entered(area: Area2D) -> void:
+		if \"GameOverLine\" in area.name:
+			$\"/root/Global\".game_over()
+"
+
+[node name="SpeedBooster-2" instance=ExtResource( 1 )]
+script = SubResource( 1 )
+
+[node name="Box" parent="." index="0"]
+texture = ExtResource( 2 )

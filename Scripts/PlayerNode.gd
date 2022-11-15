@@ -22,6 +22,9 @@ var swipe_right = false
 var swipe_left_released = false
 var swipe_right_released = false
 
+func _ready() -> void:
+	$"/root/Global".laser_fired = false
+
 func get_input():	
 	if $"/root/Global".game_is_over:
 		return

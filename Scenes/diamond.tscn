@@ -1,0 +1,97 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/redbrick.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/diamond_blue.png" type="Texture" id=2]
+[ext_resource path="res://Assets/light.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody2D
+
+var hits = 0
+var box_scale = Vector2()
+
+func _ready() -> void:
+	$Box/Light2D/AnimationPlayer.play(\"diamond_pulse\")
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+		if \"Laser\" in body.name:
+			$\"/root/Global\".kaboom()
+			hits += 1
+			scale.x -= 0.05
+			scale.y -= 0.05
+			if hits > 9:
+				$CollisionShape2D.set_deferred(\"disabled\", true)
+				$Area2D/CollisionShape2D.set_deferred(\"disabled\", true)
+				$\"/root/Global\".kaboom(\"red\")
+				$Kaboom.visible = true
+				$Kaboom.scale.x = 4
+				$Kaboom.scale.y = 4
+				$Kaboom.play(\"kaboom\")
+				$Timer.start()
+
+
+func _on_Timer_timeout():
+	$\"/root/Global\".player_score += 1
+	queue_free()
+
+
+func _on_Area2D_area_entered(area: Area2D) -> void:
+		if \"GameOverLine\" in area.name:
+			$\"/root/Global\".game_over()
+"
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "diamond_pulse"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 5, 5 ), Vector2( 3, 3 ) ]
+}
+
+[node name="SpeedBooster-2" instance=ExtResource( 1 )]
+z_index = 20
+script = SubResource( 1 )
+
+[node name="Box" parent="." index="0"]
+position = Vector2( 0, 6 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 2 )
+
+[node name="Light2D" type="Light2D" parent="Box" index="0"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Box/Light2D" index="0"]
+anims/RESET = SubResource( 2 )
+anims/diamond_pulse = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+
+[node name="Area2D" parent="." index="2"]
+visible = true
