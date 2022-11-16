@@ -1,5 +1,7 @@
 # BLAST THEM!
 
+**Completion Estimate: 60%.** Still not much more than an advanced prototype. Touchscreen controls are not working. General game balancing is still unfinished. Game over triggers awkwardly at the moment, too, with action still taking place in the background.
+
 A game for mobile and web.
 
 Point the cannon and shoot. Destroy all the bricks and other items that appear. Each row of items will descend one or more spaces per turn. If anything gets down to where the cannon is, Game Over.
