@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "TouchScreenButton",
 "class": "SwipeScreenButton",
 "language": "GDScript",
-"path": "res://Scenes/TouchScreenButton.gd"
+"path": "res://Scripts/TouchScreenButton.gd"
 } ]
 _global_script_class_icons={
 "SwipeScreenButton": ""
@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Lightz"
-run/main_scene="res://Scenes/SplashIntro.tscn"
+run/main_scene="res://Scenes/World.tscn"
 config/icon="res://Assets/icon.png"
 
 [autoload]

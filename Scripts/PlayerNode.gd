@@ -7,17 +7,9 @@ onready var Swipe = $"../SwipeScreenButton"
 var finger_on = false
 var boosted_shoot_delay = 0.1
 
-var is_drag = false
-var is_touch = false
-
 # initialise swipe control variables
-#var swipe_up = false
-#var swipe_down = false
 var swipe_left = false
 var swipe_right = false
-
-#var swipe_down_released = false
-#var swipe_up_released = false
 var swipe_left_released = false
 var swipe_right_released = false
 
@@ -31,6 +23,7 @@ func _ready() -> void:
 func get_input():	
 	if $"/root/Global".game_is_over:
 		return
+		
 	if Input.is_action_pressed("ui_left") or swipe_left:
 		if rotation_degrees > -80:
 			rotation_degrees -= 1
@@ -51,43 +44,29 @@ func get_input():
 			
 
 func _input(event):
-#	if event is InputEventScreenTouch and event.is_pressed():
-#		print("HOLD....")
+	if $"/root/Global".screen_is_touched:
+		print($"/root/Global".screen_is_touched)
+		$"/root/Global".screen_is_touched = false
+		return
 	if event is InputEventScreenDrag:
-		is_drag = true
-		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT and is_drag:
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
 			if swipe_left:
 				swipe_left = false
 			swipe_right = true
 
-		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT and is_drag:
+		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT:
 			if swipe_right:
 				swipe_right = false
 			swipe_left = true
 
 	if Swipe.on_area == false && swipe_left == true:
-		is_drag = false
 		swipe_left_released = true
 		finger_on = false
 		swipe_left = false
 	if Swipe.on_area == false && swipe_right == true:
-		is_drag = false
 		swipe_right_released = true
 		finger_on = false
 		swipe_right = false	
-		
-	if event is InputEventScreenTouch:
-		if event.pressed:
-			is_touch = true
-			shoot()
-			print("TAP")
-		
-#	if event is InputEventScreenTouch and event != InputEventScreenDrag and event.is_pressed():
-#		shoot()
-#		print("Hello")
-
-		
-
 
 	
 func _physics_process(delta: float) -> void:
@@ -99,7 +78,6 @@ func _physics_process(delta: float) -> void:
 	
 	
 func shoot():
-#	self.visible = false
 	if $"/root/Global".balls_boosted:
 		$"/root/Global".balls_allowed = 15
 		$"/root/Global".shoot_delay = 0.1
