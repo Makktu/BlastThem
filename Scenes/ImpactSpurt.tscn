@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="ImpactSpurt" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+speed_scale = 4.15
+explosiveness = 0.81
+randomness = 0.57
+emission_shape = 1
+emission_sphere_radius = 12.45
+direction = Vector2( 0, -20 )
+spread = 135.95
+gravity = Vector2( 0, -75 )
+initial_velocity_random = 0.09
+angular_velocity = 538.11
+angular_velocity_random = 0.08
+scale_amount_random = 0.23
+color = Color( 0.839216, 0.929412, 0.160784, 1 )

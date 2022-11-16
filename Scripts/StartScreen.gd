@@ -3,7 +3,7 @@ extends Node2D
 var title_direction = -20
 
 func _ready() -> void:
-#	$AudioStreamPlayer.play()
+	$AudioStreamPlayer.play()
 	_on_TitleTimer_timeout()
 	pass
 

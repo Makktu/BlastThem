@@ -13,6 +13,8 @@ func _on_Area2D_body_entered(body: Node) -> void:
 			scale.x -= 0.2
 			scale.y -= 0.2
 			if hits > 2:
+
+				
 				$CollisionShape2D.set_deferred("disabled", true)
 				$Area2D/CollisionShape2D.set_deferred("disabled", true)
 				$"/root/Global".kaboom("red")
