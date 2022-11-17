@@ -82,3 +82,5 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/balls_boosted = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]

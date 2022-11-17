@@ -13,12 +13,16 @@ var swipe_right = false
 var swipe_left_released = false
 var swipe_right_released = false
 
+var touch_timer = 0
+var tap_shoot = false
+
 func _ready() -> void:
 	$"/root/Global".laser_fired = false
 	$"/root/Global".balls_boosted = false
 	$"/root/Global".balls_allowed = 5
 	$"/root/Global".shoot_delay = 0.3
 	$"/root/Global".diamond_on_screen = false
+	
 
 func get_input():	
 	if $"/root/Global".game_is_over:
@@ -32,7 +36,7 @@ func get_input():
 		if rotation_degrees < 80:
 			rotation_degrees += 1	
 			
-	if Input.is_action_pressed("ui_up") or swipe_left_released or swipe_right_released:
+	if Input.is_action_pressed("ui_up") or tap_shoot:
 		if !$"/root/Global".laser_fired:
 			$"/root/Global".laser_fired = true
 			$"/root/Global".moved_down = false
@@ -44,11 +48,25 @@ func get_input():
 			
 
 func _input(event):
-	if $"/root/Global".screen_is_touched:
-		print($"/root/Global".screen_is_touched)
-		$"/root/Global".screen_is_touched = false
-		return
+	
+	# this is a bespoke method of detecting taps
+	# did not like the 'official' solution
+	if event is InputEventScreenTouch:
+		if $"/root/Global".screen_is_touched and touch_timer > 0:
+			$"/root/Global".screen_is_touched = false
+			tap_shoot = true
+			print("TAP")
+			shoot()
+		else:
+			$"/root/Global".screen_is_touched = true
+			touch_timer = 0.75
+			print("TOUCH")
+			# ...and take no action –
+			# because in this scenario, the player
+			# has touched, waited longer than 0.75s, and released touch
+	
 	if event is InputEventScreenDrag:
+		print("DRAG")
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
 			if swipe_left:
 				swipe_left = false
@@ -76,6 +94,10 @@ func _physics_process(delta: float) -> void:
 		$AnimationPlayer.stop()
 	get_input()
 	
+func _process(delta: float) -> void:
+	if touch_timer > 0:
+		touch_timer -= 0.05
+	
 	
 func shoot():
 	if $"/root/Global".balls_boosted:
@@ -87,6 +109,9 @@ func shoot():
 		$"/root/Global".balls_allowed = 40
 		$"/root/Global".shoot_delay = 0.05
 		$"/root/Global".diamond_shot = false
+		
+	if tap_shoot:
+		tap_shoot = false
 		
 	for n in $"/root/Global".balls_allowed:
 

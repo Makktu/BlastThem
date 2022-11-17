@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Lightz"
-run/main_scene="res://Scenes/World.tscn"
+run/main_scene="res://Scenes/SplashIntro.tscn"
 config/icon="res://Assets/icon.png"
 
 [autoload]

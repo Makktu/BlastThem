@@ -19,13 +19,13 @@ func get_swipe_direction(swipe, swipe_margin):
 	
 	print(swipe.x, swipe.y)
 	
-	if swipe.x == last_swipe_x and swipe.y == last_swipe_y:
-		$"/root/Global".screen_is_touched = true
-		return
-		
-	last_swipe_x = swipe.x
-	last_swipe_y = swipe.y	
-	$"/root/Global".screen_is_touched = false
+#	if swipe.x == last_swipe_x and swipe.y == last_swipe_y:
+#		$"/root/Global".screen_is_touched = true
+#		return
+#
+#	last_swipe_x = swipe.x
+#	last_swipe_y = swipe.y	
+#	$"/root/Global".screen_is_touched = false
 
 	if swipe.y >= -swipe_margin and swipe.y <= swipe_margin and swipe.x >= swipe_margin:
 		swipe_direction = Vector2.RIGHT
