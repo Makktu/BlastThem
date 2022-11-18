@@ -16,21 +16,22 @@ func _ready():
 func get_swipe_direction(swipe, swipe_margin):
 
 	var swipe_direction = Vector2.ZERO
-	
-	print(swipe.x, swipe.y)
-	
-#	if swipe.x == last_swipe_x and swipe.y == last_swipe_y:
-#		$"/root/Global".screen_is_touched = true
-#		return
-#
-#	last_swipe_x = swipe.x
-#	last_swipe_y = swipe.y	
-#	$"/root/Global".screen_is_touched = false
 
 	if swipe.y >= -swipe_margin and swipe.y <= swipe_margin and swipe.x >= swipe_margin:
 		swipe_direction = Vector2.RIGHT
 	if swipe.y >= -swipe_margin and swipe.y <= swipe_margin and swipe.x <= -swipe_margin:
 		swipe_direction = Vector2.LEFT
+		
+	print(swipe_direction.x)
+		
+#	if on_area and swipe_direction.x == 0:
+#		$"/root/Global".touch_counter += 0.05
+#		if $"/root/Global".touch_counter > 0.2:
+#			$"/root/Global".screen_is_touched = true
+#			$"/root/Global".touch_counter = 0
+#			return null
+#
+#	$"/root/Global".screen_is_touched = false
 		
 	if on_area:
 		return swipe_direction

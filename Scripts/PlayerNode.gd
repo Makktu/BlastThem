@@ -47,10 +47,8 @@ func get_input():
 			shoot()
 			
 
-func _input(event):
-	
-	# this is a bespoke method of detecting taps
-	# did not like the 'official' solution
+func _input(event):	
+	# bespoke method of detecting a touchscreen tap-only
 	if event is InputEventScreenTouch:
 		if $"/root/Global".screen_is_touched and touch_timer > 0:
 			$"/root/Global".screen_is_touched = false
@@ -65,8 +63,7 @@ func _input(event):
 			# because in this scenario, the player
 			# has touched, waited longer than 0.75s, and released touch
 	
-	if event is InputEventScreenDrag:
-		print("DRAG")
+	if event is InputEventScreenDrag:			
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
 			if swipe_left:
 				swipe_left = false
@@ -81,11 +78,19 @@ func _input(event):
 		swipe_left_released = true
 		finger_on = false
 		swipe_left = false
+
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
 		finger_on = false
 		swipe_right = false	
 
+	if $"/root/Global".screen_is_touched and (swipe_left or swipe_right):
+		print("right track")
+		swipe_left_released = true
+		swipe_right_released = true
+		swipe_left = false
+		swipe_right = false
+		
 	
 func _physics_process(delta: float) -> void:
 	if $"/root/Global".balls_boosted:		

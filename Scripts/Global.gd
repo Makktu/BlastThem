@@ -6,6 +6,7 @@ onready var screensize = get_viewport().size
 onready var laser_angle = 0
 
 var screen_is_touched = false
+var touch_counter = 0
 
 var first_run = true
 var obstacles = null
