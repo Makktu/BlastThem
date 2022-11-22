@@ -12,6 +12,7 @@ func _ready():
 	self.connect("pressed", self, "_on_self_pressed")
 # warning-ignore:return_value_discarded
 	self.connect("released", self, "_on_self_released")
+
 	
 func get_swipe_direction(swipe, swipe_margin):
 
@@ -21,8 +22,6 @@ func get_swipe_direction(swipe, swipe_margin):
 		swipe_direction = Vector2.RIGHT
 	if swipe.y >= -swipe_margin and swipe.y <= swipe_margin and swipe.x <= -swipe_margin:
 		swipe_direction = Vector2.LEFT
-		
-	print(swipe_direction.x)
 		
 #	if on_area and swipe_direction.x == 0:
 #		$"/root/Global".touch_counter += 0.05
@@ -41,3 +40,4 @@ func _on_self_pressed():
 	
 func _on_self_released():
 	on_area = false
+

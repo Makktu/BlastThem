@@ -20,8 +20,8 @@ extents = Vector2( 396.593, 8.5 )
 script = ExtResource( 3 )
 
 [node name="SwipeScreenButton" type="TouchScreenButton" parent="."]
-position = Vector2( -48, 74 )
-scale = Vector2( 40, 60 )
+position = Vector2( -48, 399 )
+scale = Vector2( 41.0077, 43.7773 )
 shape = SubResource( 4 )
 action = "the_finger"
 script = ExtResource( 5 )

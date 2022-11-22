@@ -12,9 +12,10 @@ func _on_Area2D_body_entered(body: Node) -> void:
 			hits += 1
 			scale.x -= 0.2
 			scale.y -= 0.2
-			if hits > 2:
-
-				
+			$PuffOfSmoke.visible = true
+			$PuffOfSmoke.play("default")
+			$PuffTimer.start()
+			if hits > 2:				
 				$CollisionShape2D.set_deferred("disabled", true)
 				$Area2D/CollisionShape2D.set_deferred("disabled", true)
 				$"/root/Global".kaboom("red")
@@ -33,3 +34,7 @@ func _on_Timer_timeout():
 func _on_Area2D_area_entered(area: Area2D) -> void:
 		if "GameOverLine" in area.name:
 			$"/root/Global".game_over()
+
+
+func _on_PuffTimer_timeout() -> void:
+	$PuffOfSmoke.visible = false

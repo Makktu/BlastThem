@@ -16,12 +16,11 @@ var local_score = 0
 
 
 func _ready() -> void:
-	for n in 2:
+	for n in 4:
 		add_row()
 		move_down()
 	$"/root/Global".balls_boosted = false
 	$"/root/Global".first_run = false
-	$"/root/Global".player_score = 0
 	local_score = $"/root/Global".player_score
 
 	

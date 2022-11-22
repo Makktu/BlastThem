@@ -6,6 +6,7 @@ onready var screensize = get_viewport().size
 onready var laser_angle = 0
 
 var screen_is_touched = false
+var finger_moving = false
 var touch_counter = 0
 
 var first_run = true
@@ -26,11 +27,15 @@ var new_shot = 0
 var shoot_delay = 0.3
 
 var diamond_shot = false
+var first_bomb = false
 
 var user_OS = OS.get_name()
+var control_scheme = 0
 
 func _ready() -> void:
 	print(user_OS)
+	if user_OS == "Windows":
+		control_scheme = 0
 	# 💥💥>>>>>>> WHEN TOUCHSCREEN IS IMPLEMENTED
 	# >>>>>>> WILL NEED TO SEPARATE CONTROL SCHEMES
 	# >>>>>>> BETWEEN TOUCHSCREEN AND KEYBOARD - HERE!

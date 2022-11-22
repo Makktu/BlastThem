@@ -4,7 +4,6 @@ const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 
 onready var Swipe = $"../SwipeScreenButton"
 
-var finger_on = false
 var boosted_shoot_delay = 0.1
 
 # initialise swipe control variables
@@ -15,13 +14,22 @@ var swipe_right_released = false
 
 var touch_timer = 0
 var tap_shoot = false
+var last_position
+
+var swipe_speed
+
+
 
 func _ready() -> void:
+	$"/root/Global".first_bomb = false
 	$"/root/Global".laser_fired = false
 	$"/root/Global".balls_boosted = false
 	$"/root/Global".balls_allowed = 5
 	$"/root/Global".shoot_delay = 0.3
 	$"/root/Global".diamond_on_screen = false
+	$"/root/Global".player_score = 0
+	last_position = 0
+	swipe_speed = 0
 	
 
 func get_input():	
@@ -29,12 +37,23 @@ func get_input():
 		return
 		
 	if Input.is_action_pressed("ui_left") or swipe_left:
-		if rotation_degrees > -80:
-			rotation_degrees -= 1
+		if $"/root/Global".finger_moving or $"/root/Global".control_scheme == 0:
+			if rotation_degrees > -80:
+				rotation_degrees -= 3
+			# 	revisit all this when game design done
+#			if swipe_speed > 200:
+#				rotation_degrees -= 2
+#			if swipe_speed > 300:
+#				rotation_degrees -= 3
 		
 	if Input.is_action_pressed("ui_right") or swipe_right:
-		if rotation_degrees < 80:
-			rotation_degrees += 1	
+		if $"/root/Global".finger_moving or $"/root/Global".control_scheme == 0:
+			if rotation_degrees < 80:
+				rotation_degrees += 3
+#			if swipe_speed > 200:
+#				rotation_degrees += 2
+#			if swipe_speed > 300:
+#				rotation_degrees += 3	
 			
 	if Input.is_action_pressed("ui_up") or tap_shoot:
 		if !$"/root/Global".laser_fired:
@@ -47,49 +66,56 @@ func get_input():
 			shoot()
 			
 
-func _input(event):	
-	# bespoke method of detecting a touchscreen tap-only
+func _input(event):
 	if event is InputEventScreenTouch:
-		if $"/root/Global".screen_is_touched and touch_timer > 0:
-			$"/root/Global".screen_is_touched = false
-			tap_shoot = true
-			print("TAP")
-			shoot()
-		else:
-			$"/root/Global".screen_is_touched = true
+		$"/root/Global".screen_is_touched = !$"/root/Global".screen_is_touched
+		print("TOUCH", $"/root/Global".screen_is_touched)
+		# use this to resolve the big problem
+		if $"/root/Global".screen_is_touched:
+			# start the timer
 			touch_timer = 0.75
-			print("TOUCH")
-			# ...and take no action –
-			# because in this scenario, the player
-			# has touched, waited longer than 0.75s, and released touch
+		else:
+			if touch_timer > 0:
+				tap_shoot = true
+				touch_timer = 0
 	
-	if event is InputEventScreenDrag:			
+#	if last_position == event.position.x:
+#		finger_timer = 0
+#	else:
+#		last_position = event.position.x
+#		$"/root/Global".finger_moving = true
+	
+	
+	if event is InputEventScreenDrag:
+		
+		$"/root/Global".finger_moving = true
+		
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
+			swipe_speed = event.speed.x
+			print(swipe_speed)
 			if swipe_left:
 				swipe_left = false
 			swipe_right = true
 
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT:
+			swipe_speed = event.speed.x
+			print(swipe_speed)
 			if swipe_right:
 				swipe_right = false
 			swipe_left = true
+			
+		if !Swipe.get_swipe_direction(event.relative, 5):
+			$"/root/Global".finger_moving = false
+			
+			
 
 	if Swipe.on_area == false && swipe_left == true:
 		swipe_left_released = true
-		finger_on = false
 		swipe_left = false
 
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
-		finger_on = false
 		swipe_right = false	
-
-	if $"/root/Global".screen_is_touched and (swipe_left or swipe_right):
-		print("right track")
-		swipe_left_released = true
-		swipe_right_released = true
-		swipe_left = false
-		swipe_right = false
 		
 	
 func _physics_process(delta: float) -> void:
@@ -99,10 +125,11 @@ func _physics_process(delta: float) -> void:
 		$AnimationPlayer.stop()
 	get_input()
 	
+	
 func _process(delta: float) -> void:
 	if touch_timer > 0:
 		touch_timer -= 0.05
-	
+			
 	
 func shoot():
 	if $"/root/Global".balls_boosted:
