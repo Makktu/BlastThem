@@ -32,8 +32,6 @@ White Brick - 3 hits required to destroy. Worth 3 point.
 
 Yellow Brick - 5 hits required to destroy. Worth 5 points.
 
-Red Brick - 10 hits required to destroy. Worth 10 points.
-
 Smoking Bomb - 15 hits required to destroy. Worth 15 points. The player gets 15 (FIFTEEN) shots in the next salvo.
 
 Diamond - 30 hits required to destroy. Worth 30 points. The player gets 30 (THIRTY) shots in the next salvo.
