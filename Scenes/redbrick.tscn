@@ -46,3 +46,7 @@ script = SubResource( 1 )
 
 [node name="Box" parent="." index="0"]
 texture = ExtResource( 2 )
+
+[node name="PuffOfSmoke" parent="." index="5"]
+modulate = Color( 0.909804, 0.819608, 0.0980392, 1 )
+frame = 35

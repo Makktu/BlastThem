@@ -47,15 +47,16 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 	if $"/root/Global".new_shot >= $"/root/Global".balls_allowed:
 		$"/root/Global".laser_fired = false
 		$"/root/Global".balls_allowed = 5
-		if !$"/root/Global".balls_boosted and !$"/root/Global".moved_down:
+		if !$"/root/Global".moved_down:
 			get_parent().move_down()
 			if $"/root/Global".player_score > 200:
 				get_parent().move_down()
-#			if $"/root/Global".player_score > 200:
+#			if $"/root/Global".balls_boosted:
 #				get_parent().move_down()
+			if $"/root/Global".player_score > 1000:
+				get_parent().move_down()
 			$"/root/Global".moved_down = true
 			$"/root/Global".balls_allowed = 5
-			$"/root/Global".balls_boosted = false
 			$"/root/Global".shoot_delay = 0.3
 #			$"/root/Global".laser_fired = false
 		rebounding = false

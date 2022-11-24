@@ -33,7 +33,9 @@ func _on_Area2D_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
-	$\"/root/Global\".balls_boosted = true
+	if not $\"/root/Global\".diamond_shot:
+		$\"/root/Global\".balls_boosted = true
+		$\"/root/Global\".boosted_shots = 15
 #	$\"/root/Global\".balls_allowed = 15
 	$\"/root/Global\".player_score += 3
 	queue_free()

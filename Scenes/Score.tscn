@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/Score.gd" type="Script" id=2]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 72
 font_data = ExtResource( 3 )
 
@@ -11,7 +11,7 @@ font_data = ExtResource( 3 )
 size = 26
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 size = 26
 font_data = ExtResource( 3 )
 
@@ -24,7 +24,7 @@ margin_top = 16.0
 margin_right = 424.0
 margin_bottom = 116.0
 custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 text = "0"
 
 [node name="BestScore" type="Label" parent="."]
@@ -42,5 +42,5 @@ margin_top = 2.0
 margin_right = 580.0
 margin_bottom = 42.0
 custom_colors/font_color = Color( 0.254902, 0.909804, 0.0980392, 1 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "0"

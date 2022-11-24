@@ -14,6 +14,7 @@ var obstacles = null
 var moved_down = false
 var all_balls_gone = false
 
+var boosted_shots = 0
 
 var player_score = 0
 var best_score = 0
@@ -48,6 +49,8 @@ func kaboom(type = ""):
 		
 func game_over():
 	# interrupt all actions
+	
+	get_tree().paused = true
 	game_is_over = true
 	
 	if !best_score_beaten:
@@ -69,6 +72,7 @@ func game_over_fade():
 		
 		
 func _on_PlayAgain_pressed() -> void:
+	get_tree().paused = false
 	game_is_over = false
 	$CanvasLayer.visible = false
 	$CanvasLayer/GameOverFade/PlayAgain.visible = false

@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/PlayerNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/bzzzt.wav" type="AudioStream" id=2]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Score.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/TouchScreenButton.gd" type="Script" id=5]
+[ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="RectangleShape2D" id=4]
 
@@ -15,6 +16,110 @@ extents = Vector2( 8.80903, 1.45 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 396.593, 8.5 )
+
+[sub_resource type="GDScript" id=5]
+script/source = "extends Node2D
+
+#
+#var value = \"0\"
+#var global_best_score = 0
+#
+#func _ready() -> void:
+#	if $\"/root/Global\".best_score > 0:
+#		update_best_score($\"/root/Global\".best_score)
+
+func _physics_process(delta: float) -> void:
+	if $\"/root/Global\".balls_boosted:
+		update_shots($\"/root/Global\".boosted_shots)
+	else:
+		update_shots($\"/root/Global\".balls_allowed)
+		
+
+func update_shots(shots):
+	if shots == 40:
+		$Shots/Amount/AnimationPlayer.play(\"forty_inflate\")
+	if shots == 15:
+		$Shots/Amount/AnimationPlayer.play(\"Inflate\")
+	if shots == 5:
+		$Shots/Amount/AnimationPlayer.play(\"RESET\")
+	$Shots/Amount.text = str(shots)
+
+"
+
+[sub_resource type="DynamicFont" id=6]
+size = 72
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Inflate"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.866667, 0.721569, 0.0313726, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:custom_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "forty_inflate"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0.298039, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.3 ), Vector2( 1, 1 ) ]
+}
 
 [node name="World" type="Node2D"]
 script = ExtResource( 3 )
@@ -27,7 +132,7 @@ action = "the_finger"
 script = ExtResource( 5 )
 
 [node name="PlayerNode" parent="." instance=ExtResource( 1 )]
-position = Vector2( 360, 1000 )
+position = Vector2( 360, 1050 )
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 
@@ -79,9 +184,39 @@ stream = ExtResource( 2 )
 position = Vector2( 3, 3 )
 
 [node name="GameOverLine" type="Area2D" parent="."]
-position = Vector2( -2, 87 )
+position = Vector2( 0, 148 )
 
 [node name="LoseLine" type="CollisionShape2D" parent="GameOverLine"]
 position = Vector2( 361, 833 )
 scale = Vector2( 0.879996, 1 )
 shape = SubResource( 3 )
+
+[node name="NextBalls" type="Node2D" parent="."]
+position = Vector2( 375, 1167 )
+script = SubResource( 5 )
+
+[node name="Shots" type="Label" parent="NextBalls"]
+modulate = Color( 0.956863, 0.929412, 0.929412, 1 )
+margin_left = -359.0
+margin_top = 34.0
+margin_right = 49.0
+margin_bottom = 134.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Shots:"
+
+[node name="Amount" type="Label" parent="NextBalls/Shots"]
+modulate = Color( 0.956863, 0.929412, 0.929412, 1 )
+margin_left = 456.0
+margin_top = -2.0
+margin_right = 888.0
+margin_bottom = 98.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "5"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NextBalls/Shots/Amount"]
+anims/Inflate = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+anims/forty_inflate = SubResource( 9 )

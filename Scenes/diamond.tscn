@@ -40,6 +40,8 @@ func _on_Area2D_body_entered(body: Node) -> void:
 
 func _on_Timer_timeout():
 	$\"/root/Global\".player_score += 10
+	$\"/root/Global\".balls_boosted = true
+	$\"/root/Global\".boosted_shots = 40
 	$\"/root/Global\".diamond_shot = true
 	queue_free()
 
@@ -157,3 +159,6 @@ pitch_scale = 2.0
 
 [node name="Breaking" type="AudioStreamPlayer" parent="." index="6"]
 stream = ExtResource( 5 )
+
+[node name="PuffOfSmoke" parent="." index="7"]
+frame = 46

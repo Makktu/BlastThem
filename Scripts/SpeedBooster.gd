@@ -13,7 +13,7 @@ func _on_Area2D_body_entered(body: Node) -> void:
 			scale.x -= 0.2
 			scale.y -= 0.2
 			$PuffOfSmoke.visible = true
-			$PuffOfSmoke.play("default")
+			$PuffOfSmoke.play("starburst")
 			$PuffTimer.start()
 			if hits > 2:				
 				$CollisionShape2D.set_deferred("disabled", true)
