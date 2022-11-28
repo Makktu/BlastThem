@@ -32,13 +32,14 @@ func _ready() -> void:
 	swipe_speed = 0
 	
 
-func get_input():	
+func get_input():
+	print(rotation_degrees)	
 	if $"/root/Global".game_is_over:
 		return
 		
 	if Input.is_action_pressed("ui_left") or swipe_left:
 		if $"/root/Global".finger_moving or $"/root/Global".control_scheme == 0:
-			if rotation_degrees > -80:
+			if rotation_degrees > 100:
 				rotation_degrees -= 3
 			# 	revisit all this when game design done
 #			if swipe_speed > 200:
@@ -48,7 +49,7 @@ func get_input():
 		
 	if Input.is_action_pressed("ui_right") or swipe_right:
 		if $"/root/Global".finger_moving or $"/root/Global".control_scheme == 0:
-			if rotation_degrees < 80:
+			if rotation_degrees < 260:
 				rotation_degrees += 3
 #			if swipe_speed > 200:
 #				rotation_degrees += 2
