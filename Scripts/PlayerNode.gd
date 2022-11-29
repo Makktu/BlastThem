@@ -68,6 +68,12 @@ func get_input():
 			
 
 func _input(event):
+	print(event)
+	
+	if $"/root/Global".screen_is_touched:
+		$"/root/Global".finger_moving = false
+		
+	
 	if event is InputEventScreenTouch:
 		$"/root/Global".screen_is_touched = !$"/root/Global".screen_is_touched
 		print("TOUCH", $"/root/Global".screen_is_touched)
@@ -108,7 +114,6 @@ func _input(event):
 		if !Swipe.get_swipe_direction(event.relative, 5):
 			$"/root/Global".finger_moving = false
 			
-			
 
 	if Swipe.on_area == false && swipe_left == true:
 		swipe_left_released = true
@@ -123,7 +128,7 @@ func _physics_process(delta: float) -> void:
 	if $"/root/Global".balls_boosted:		
 		$AnimationPlayer.play("balls_boosted")
 	if !$"/root/Global".balls_boosted:
-		$AnimationPlayer.stop()
+		$AnimationPlayer.play("RESET")
 	get_input()
 	
 	
@@ -143,10 +148,15 @@ func shoot():
 		$"/root/Global".shoot_delay = 0.05
 		$"/root/Global".diamond_shot = false
 		
+	if $"/root/Global".charge_has_played:
+		$"/root/Global".charge_has_played = false
+		
 	if tap_shoot:
 		tap_shoot = false
 		
 	for n in $"/root/Global".balls_allowed:
+		
+		$ShootingAnim.play("shoot")
 
 		# create local instance of the laser – **this is not on-screen yet**
 		var laser_instance = pl_laser_beam.instance()
@@ -161,3 +171,8 @@ func shoot():
 		# now the laser is added to the scene at the correct place and at the correct rotation angle
 		get_parent().add_child(laser_instance)
 		yield(get_tree().create_timer($"/root/Global".shoot_delay), "timeout")
+		
+		if $"/root/Global".balls_allowed > 5:
+			$ShootingAnim.play("RESET")
+		
+	$ShootingAnim.play("RESET")

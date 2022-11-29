@@ -21,6 +21,9 @@ func _on_Area2D_body_entered(body: Node) -> void:
 				scale.x += 0.01
 				scale.y += 0.01
 			if hits > 5:
+				if !$\"/root/Global\".charge_has_played:
+					$\"/root/Global\".charging()
+					$\"/root/Global\".charge_has_played = true
 				$CollisionShape2D.set_deferred(\"disabled\", true)
 				$Area2D/CollisionShape2D.set_deferred(\"disabled\", true)
 				$\"/root/Global\".kaboom()

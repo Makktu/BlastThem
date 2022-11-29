@@ -34,6 +34,8 @@ func _on_Area2D_body_entered(body: Node) -> void:
 				$Breaking.play()
 #				$Box/Light2D/AnimationPlayer.play(\"light_out\")
 				$Timer.start()
+				$\"/root/Global\".charging(\"diamond\")
+				$\"/root/Global\".charge_has_played = true
 				$\"/root/Global\".diamond_on_screen = false
 				
 
@@ -161,4 +163,4 @@ pitch_scale = 2.0
 stream = ExtResource( 5 )
 
 [node name="PuffOfSmoke" parent="." index="7"]
-frame = 46
+frame = 16

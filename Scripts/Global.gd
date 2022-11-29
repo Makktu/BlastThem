@@ -20,6 +20,8 @@ var player_score = 0
 var best_score = 0
 var best_score_beaten = false
 
+var charge_has_played = false
+
 var diamond_on_screen = false
 var bomb_likelihood = 2
 var balls_boosted = false
@@ -69,6 +71,12 @@ func game_over():
 func game_over_fade():
 	$CanvasLayer.visible = true
 	$CanvasLayer/GameOverFade/AnimationPlayer.play("game_over")
+	
+func charging(diamond = ""):
+	if diamond:
+		$DiamondBooster.play()
+	else:
+		$BallsBoosted.play()
 		
 		
 func _on_PlayAgain_pressed() -> void:
