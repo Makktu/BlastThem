@@ -20,6 +20,9 @@ func _on_Area2D_body_entered(body: Node) -> void:
 			hits += 1
 			scale.x -= 0.1
 			scale.y -= 0.1
+			$PuffOfSmoke.visible = true
+			$PuffOfSmoke.play(\"starburst\")
+			$PuffTimer.start()
 			if hits > 3:
 				$CollisionShape2D.set_deferred(\"disabled\", true)
 				$Area2D/CollisionShape2D.set_deferred(\"disabled\", true)
@@ -39,6 +42,10 @@ func _on_Timer_timeout():
 func _on_Area2D_area_entered(area: Area2D) -> void:
 		if \"GameOverLine\" in area.name:
 			$\"/root/Global\".game_over()
+
+
+func _on_PuffTimer_timeout():
+	$PuffOfSmoke.visible = false
 "
 
 [node name="SpeedBooster-2" instance=ExtResource( 1 )]
@@ -49,4 +56,4 @@ texture = ExtResource( 2 )
 
 [node name="PuffOfSmoke" parent="." index="5"]
 modulate = Color( 0.909804, 0.819608, 0.0980392, 1 )
-frame = 35
+frame = 31

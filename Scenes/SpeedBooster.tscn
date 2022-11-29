@@ -244,7 +244,7 @@ position = Vector2( 4, 1 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 29 )
 animation = "starburst"
-frame = 53
+frame = 1
 speed_scale = 2.0
 playing = true
 
