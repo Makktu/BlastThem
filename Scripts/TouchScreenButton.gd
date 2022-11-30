@@ -23,15 +23,6 @@ func get_swipe_direction(swipe, swipe_margin):
 	if swipe.y >= -swipe_margin and swipe.y <= swipe_margin and swipe.x <= -swipe_margin:
 		swipe_direction = Vector2.LEFT
 		
-#	if on_area and swipe_direction.x == 0:
-#		$"/root/Global".touch_counter += 0.05
-#		if $"/root/Global".touch_counter > 0.2:
-#			$"/root/Global".screen_is_touched = true
-#			$"/root/Global".touch_counter = 0
-#			return null
-#
-#	$"/root/Global".screen_is_touched = false
-		
 	if on_area:
 		return swipe_direction
 		

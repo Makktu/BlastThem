@@ -18,6 +18,8 @@ var last_position
 
 var swipe_speed
 
+var last_mouse = Vector2.ZERO
+
 
 
 func _ready() -> void:
@@ -33,28 +35,25 @@ func _ready() -> void:
 	
 
 func get_input():
-	print(rotation_degrees)	
 	if $"/root/Global".game_is_over:
 		return
 		
-	if Input.is_action_pressed("ui_left") or swipe_left:
-		if $"/root/Global".finger_moving or $"/root/Global".control_scheme == 0:
-			if rotation_degrees > 100:
-				rotation_degrees -= 3
-			# 	revisit all this when game design done
-#			if swipe_speed > 200:
-#				rotation_degrees -= 2
-#			if swipe_speed > 300:
-#				rotation_degrees -= 3
+	if Input.is_action_pressed("ui_left") or (swipe_left and $"/root/Global".finger_moving):
+		if rotation_degrees > 100:
+			rotation_degrees -= 3
+		# 	revisit all this when game design done
+#		if swipe_speed > 400 and rotation_degrees > 100:
+#			rotation_degrees -= 2
+#		if swipe_speed > 600 and rotation_degrees > 100:
+#			rotation_degrees -= 3
 		
-	if Input.is_action_pressed("ui_right") or swipe_right:
-		if $"/root/Global".finger_moving or $"/root/Global".control_scheme == 0:
-			if rotation_degrees < 260:
-				rotation_degrees += 3
-#			if swipe_speed > 200:
-#				rotation_degrees += 2
-#			if swipe_speed > 300:
-#				rotation_degrees += 3	
+	if Input.is_action_pressed("ui_right") or (swipe_right and $"/root/Global".finger_moving):
+		if rotation_degrees < 260:
+			rotation_degrees += 3
+#		if swipe_speed > 400 and rotation_degrees < 260:
+#			rotation_degrees += 2
+#		if swipe_speed > 600 and rotation_degrees < 260:
+#			rotation_degrees += 3	
 			
 	if Input.is_action_pressed("ui_up") or tap_shoot:
 		if !$"/root/Global".laser_fired:
@@ -68,12 +67,6 @@ func get_input():
 			
 
 func _input(event):
-	print(event)
-	
-	if $"/root/Global".screen_is_touched:
-		$"/root/Global".finger_moving = false
-		
-	
 	if event is InputEventScreenTouch:
 		$"/root/Global".screen_is_touched = !$"/root/Global".screen_is_touched
 		print("TOUCH", $"/root/Global".screen_is_touched)
@@ -86,33 +79,26 @@ func _input(event):
 				tap_shoot = true
 				touch_timer = 0
 	
-#	if last_position == event.position.x:
-#		finger_timer = 0
-#	else:
-#		last_position = event.position.x
-#		$"/root/Global".finger_moving = true
-	
+	if $"/root/Global".finger_moving == false:
+		swipe_left = false
+		swipe_right = false
+		return
 	
 	if event is InputEventScreenDrag:
 		
-		$"/root/Global".finger_moving = true
+#		$"/root/Global".finger_moving = true
 		
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
 			swipe_speed = event.speed.x
-			print(swipe_speed)
 			if swipe_left:
 				swipe_left = false
 			swipe_right = true
 
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT:
 			swipe_speed = event.speed.x
-			print(swipe_speed)
 			if swipe_right:
 				swipe_right = false
 			swipe_left = true
-			
-		if !Swipe.get_swipe_direction(event.relative, 5):
-			$"/root/Global".finger_moving = false
 			
 
 	if Swipe.on_area == false && swipe_left == true:
@@ -122,13 +108,21 @@ func _input(event):
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
 		swipe_right = false	
-		
+	
 	
 func _physics_process(delta: float) -> void:
 	if $"/root/Global".balls_boosted:		
 		$AnimationPlayer.play("balls_boosted")
 	if !$"/root/Global".balls_boosted:
 		$AnimationPlayer.play("RESET")
+	if $"/root/Global".screen_is_touched:
+		if get_global_mouse_position() != last_mouse:
+			print("Finger Moving")
+			$"/root/Global".finger_moving = true
+		else:
+			print("Finger not moving")
+			$"/root/Global".finger_moving = false
+	last_mouse = get_global_mouse_position()
 	get_input()
 	
 	

@@ -20,6 +20,7 @@ func _ready() -> void:
 		add_row()
 		move_down()
 	$"/root/Global".balls_boosted = false
+	$"/root/Global".balls_allowed = 5
 	$"/root/Global".first_run = false
 	local_score = $"/root/Global".player_score
 
