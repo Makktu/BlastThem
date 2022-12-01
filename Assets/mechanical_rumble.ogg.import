@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mechanical_rumble.ogg-de0c538f4f83a66bdc9f8e936f375a4d.oggstr"
+
+[deps]
+
+source_file="res://Assets/mechanical_rumble.ogg"
+dest_files=[ "res://.import/mechanical_rumble.ogg-de0c538f4f83a66bdc9f8e936f375a4d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

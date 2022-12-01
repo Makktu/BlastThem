@@ -19,3 +19,7 @@ func _on_TitleTimer_timeout() -> void:
 		title_direction = -title_direction
 	$TitleTimer.start()
 	 
+
+
+func _on_CREDITS_pressed():
+	get_tree().change_scene("res://Scenes/Credits.tscn")

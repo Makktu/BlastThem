@@ -12,7 +12,7 @@ var touch_counter = 0
 var first_run = true
 var obstacles = null
 var moved_down = false
-var all_balls_gone = false
+#var all_balls_gone = true
 
 var boosted_shots = 0
 

@@ -28,19 +28,19 @@ custom_fonts/font = SubResource( 6 )
 text = "0"
 
 [node name="BestScore" type="Label" parent="."]
-margin_left = 348.0
-margin_top = 21.0
-margin_right = 756.0
-margin_bottom = 71.0
+margin_left = 547.0
+margin_top = 17.0
+margin_right = 955.0
+margin_bottom = 67.0
 custom_colors/font_color = Color( 0.254902, 0.909804, 0.0980392, 1 )
 custom_fonts/font = SubResource( 5 )
-text = "Best:"
+text = "Best"
 
 [node name="BestValue" type="Label" parent="BestScore"]
-margin_left = 172.0
-margin_top = 2.0
-margin_right = 580.0
-margin_bottom = 42.0
+margin_left = -2.0
+margin_top = 33.0
+margin_right = 406.0
+margin_bottom = 73.0
 custom_colors/font_color = Color( 0.254902, 0.909804, 0.0980392, 1 )
 custom_fonts/font = SubResource( 7 )
 text = "0"

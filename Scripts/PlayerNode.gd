@@ -14,9 +14,6 @@ var swipe_right_released = false
 
 var touch_timer = 0
 var tap_shoot = false
-var last_position
-
-var swipe_speed
 
 var last_mouse = Vector2.ZERO
 
@@ -30,8 +27,6 @@ func _ready() -> void:
 	$"/root/Global".shoot_delay = 0.3
 	$"/root/Global".diamond_on_screen = false
 	$"/root/Global".player_score = 0
-	last_position = 0
-	swipe_speed = 0
 	
 
 func get_input():
@@ -40,21 +35,17 @@ func get_input():
 		
 	if Input.is_action_pressed("ui_left") or (swipe_left and $"/root/Global".finger_moving):
 		if rotation_degrees > 100:
-			rotation_degrees -= 3
-		# 	revisit all this when game design done
-#		if swipe_speed > 400 and rotation_degrees > 100:
-#			rotation_degrees -= 2
-#		if swipe_speed > 600 and rotation_degrees > 100:
-#			rotation_degrees -= 3
+			rotation_degrees -= 4
+			$Rumble.play()
 		
 	if Input.is_action_pressed("ui_right") or (swipe_right and $"/root/Global".finger_moving):
 		if rotation_degrees < 260:
-			rotation_degrees += 3
-#		if swipe_speed > 400 and rotation_degrees < 260:
-#			rotation_degrees += 2
-#		if swipe_speed > 600 and rotation_degrees < 260:
-#			rotation_degrees += 3	
+			rotation_degrees += 4
+			$Rumble.play()
 			
+	if Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_right") or swipe_left_released or swipe_right_released:
+		$Rumble.stop()
+		
 	if Input.is_action_pressed("ui_up") or tap_shoot:
 		if !$"/root/Global".laser_fired:
 			$"/root/Global".laser_fired = true
@@ -71,13 +62,14 @@ func _input(event):
 		$"/root/Global".screen_is_touched = !$"/root/Global".screen_is_touched
 		print("TOUCH", $"/root/Global".screen_is_touched)
 		# use this to resolve the big problem
-		if $"/root/Global".screen_is_touched:
-			# start the timer
-			touch_timer = 0.75
-		else:
-			if touch_timer > 0:
-				tap_shoot = true
-				touch_timer = 0
+		if !$"/root/Global".laser_fired:
+			if $"/root/Global".screen_is_touched:
+				# start the timer
+				touch_timer = 0.75
+			else:
+				if touch_timer > 0:
+					tap_shoot = true
+					touch_timer = 0
 	
 	if $"/root/Global".finger_moving == false:
 		swipe_left = false
@@ -89,13 +81,11 @@ func _input(event):
 #		$"/root/Global".finger_moving = true
 		
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
-			swipe_speed = event.speed.x
 			if swipe_left:
 				swipe_left = false
 			swipe_right = true
 
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.RIGHT:
-			swipe_speed = event.speed.x
 			if swipe_right:
 				swipe_right = false
 			swipe_left = true
@@ -117,10 +107,8 @@ func _physics_process(delta: float) -> void:
 		$AnimationPlayer.play("RESET")
 	if $"/root/Global".screen_is_touched:
 		if get_global_mouse_position() != last_mouse:
-			print("Finger Moving")
 			$"/root/Global".finger_moving = true
 		else:
-			print("Finger not moving")
 			$"/root/Global".finger_moving = false
 	last_mouse = get_global_mouse_position()
 	get_input()

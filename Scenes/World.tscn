@@ -132,7 +132,7 @@ action = "the_finger"
 script = ExtResource( 5 )
 
 [node name="PlayerNode" parent="." instance=ExtResource( 1 )]
-position = Vector2( 360, 1050 )
+position = Vector2( 364, 1008 )
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
 
@@ -187,7 +187,7 @@ position = Vector2( 3, 3 )
 position = Vector2( 0, 148 )
 
 [node name="LoseLine" type="CollisionShape2D" parent="GameOverLine"]
-position = Vector2( 360, 884 )
+position = Vector2( 360, 835 )
 scale = Vector2( 0.879996, 1 )
 shape = SubResource( 3 )
 

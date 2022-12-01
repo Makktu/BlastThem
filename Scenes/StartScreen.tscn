@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/game_start_music.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/StartScreen.gd" type="Script" id=2]
@@ -60,6 +60,16 @@ tracks/0/keys = {
 "values": [ Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0.00392157, 0.764706, 0.862745, 0.521569 ), Color( 0.909804, 0.819608, 0.0980392, 1 ) ]
 }
 
+[sub_resource type="DynamicFont" id=10]
+size = 48
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+
 [sub_resource type="DynamicFont" id=6]
 size = 40
 font_data = ExtResource( 4 )
@@ -95,6 +105,18 @@ root_node = NodePath("../../Title")
 anims/RESET = SubResource( 4 )
 anims/buttonflash = SubResource( 5 )
 
+[node name="CREDITS" type="Button" parent="BGContainer"]
+margin_left = 219.0
+margin_top = 1166.0
+margin_right = 619.0
+margin_bottom = 1266.0
+rect_scale = Vector2( 0.7, 0.7 )
+custom_colors/font_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+custom_fonts/font = SubResource( 10 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/normal = SubResource( 12 )
+text = "CREDITS"
+
 [node name="BestScore" type="Label" parent="BGContainer"]
 margin_left = 162.0
 margin_top = 912.0
@@ -119,9 +141,9 @@ scale = Vector2( 1.25, 3 )
 texture = ExtResource( 3 )
 
 [node name="74apps" type="Label" parent="BGContainer"]
-margin_left = 230.0
+margin_left = 245.0
 margin_top = 1248.0
-margin_right = 638.0
+margin_right = 653.0
 margin_bottom = 1288.0
 custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
 custom_fonts/font = SubResource( 9 )
@@ -135,4 +157,5 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="pressed" from="BGContainer/START" to="." method="_on_START_pressed"]
+[connection signal="pressed" from="BGContainer/CREDITS" to="." method="_on_CREDITS_pressed"]
 [connection signal="timeout" from="TitleTimer" to="." method="_on_TitleTimer_timeout"]

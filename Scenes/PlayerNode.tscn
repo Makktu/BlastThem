@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PlayerNode.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Cannon3.png" type="Texture" id=2]
+[ext_resource path="res://Assets/robot3.ogg" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 17.5, 65.5 )
@@ -120,3 +121,6 @@ anims/balls_boosted = SubResource( 3 )
 [node name="ShootingAnim" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 4 )
 anims/shoot = SubResource( 5 )
+
+[node name="Rumble" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
