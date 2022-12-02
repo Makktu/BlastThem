@@ -27,6 +27,9 @@ func _ready() -> void:
 	$"/root/Global".shoot_delay = 0.3
 	$"/root/Global".diamond_on_screen = false
 	$"/root/Global".player_score = 0
+	tap_shoot = false
+	last_mouse = Vector2.ZERO
+	touch_timer = 0
 	
 
 func get_input():
@@ -37,14 +40,19 @@ func get_input():
 		if rotation_degrees > 100:
 			rotation_degrees -= 4
 			$Rumble.play()
+			smoke_effect()
+			
 		
 	if Input.is_action_pressed("ui_right") or (swipe_right and $"/root/Global".finger_moving):
 		if rotation_degrees < 260:
 			rotation_degrees += 4
 			$Rumble.play()
+			smoke_effect()
+			
 			
 	if Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_right") or swipe_left_released or swipe_right_released:
 		$Rumble.stop()
+		
 		
 	if Input.is_action_pressed("ui_up") or tap_shoot:
 		if !$"/root/Global".laser_fired:
@@ -158,3 +166,12 @@ func shoot():
 			$ShootingAnim.play("RESET")
 		
 	$ShootingAnim.play("RESET")
+	
+	
+func smoke_effect():
+		$Smoke.visible = true
+		$Smoke.play("smoke")
+		$Smoke.play("smoke")
+		yield(get_tree().create_timer(0.5), "timeout")
+		$Smoke.visible = false
+
