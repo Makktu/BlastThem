@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/PlayerNode.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Cannon3.png" type="Texture" id=2]
-[ext_resource path="res://Assets/robot3_1.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/gear.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Assets/vapor_cloud.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -187,5 +187,6 @@ scale = Vector2( 2.91721, 2.64502 )
 z_index = -10
 frames = SubResource( 15 )
 animation = "smoke"
+frame = 1
 speed_scale = 2.0
 playing = true

@@ -27,6 +27,8 @@ func _ready() -> void:
 	$"/root/Global".shoot_delay = 0.3
 	$"/root/Global".diamond_on_screen = false
 	$"/root/Global".player_score = 0
+	$"/root/Global".screen_is_touched = false
+	$"/root/Global".diamond_shot = false
 	tap_shoot = false
 	last_mouse = Vector2.ZERO
 	touch_timer = 0
@@ -38,16 +40,17 @@ func get_input():
 		
 	if Input.is_action_pressed("ui_left") or (swipe_left and $"/root/Global".finger_moving):
 		if rotation_degrees > 100:
-			rotation_degrees -= 4
-			$Rumble.play()
-			smoke_effect()
+			rotation_degrees -= 2
+			if !$Rumble.playing:
+				$Rumble.play()
 			
 		
 	if Input.is_action_pressed("ui_right") or (swipe_right and $"/root/Global".finger_moving):
 		if rotation_degrees < 260:
-			rotation_degrees += 4
-			$Rumble.play()
-			smoke_effect()
+			rotation_degrees += 2
+			if !$Rumble.playing:
+				$Rumble.play()
+
 			
 			
 	if Input.is_action_just_released("ui_left") or Input.is_action_just_released("ui_right") or swipe_left_released or swipe_right_released:
