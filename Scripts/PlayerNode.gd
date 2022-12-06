@@ -82,10 +82,10 @@ func _input(event):
 					tap_shoot = true
 					touch_timer = 0
 	
-	if $"/root/Global".finger_moving == false:
-		swipe_left = false
-		swipe_right = false
-		return
+#	if $"/root/Global".finger_moving == false:
+#		swipe_left = false
+#		swipe_right = false
+#		return
 	
 	if event is InputEventScreenDrag:
 		

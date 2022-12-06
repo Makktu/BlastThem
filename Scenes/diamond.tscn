@@ -23,6 +23,9 @@ func _on_Area2D_body_entered(body: Node) -> void:
 			$Tink.play()
 			scale.x += 0.05
 			scale.y += 0.05
+			if hits > 5:
+				$Box/Light2D.scale.x = 10
+				$Box/Light2D.scale.y = 10
 			if hits > 10:
 				$CollisionShape2D.set_deferred(\"disabled\", true)
 				$Area2D/CollisionShape2D.set_deferred(\"disabled\", true)
@@ -163,4 +166,4 @@ pitch_scale = 2.0
 stream = ExtResource( 5 )
 
 [node name="PuffOfSmoke" parent="." index="7"]
-frame = 16
+frame = 4
