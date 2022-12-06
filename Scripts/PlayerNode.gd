@@ -15,6 +15,8 @@ var swipe_right_released = false
 var touch_timer = 0
 var tap_shoot = false
 
+var rotation_speed = 4
+
 var last_mouse = Vector2.ZERO
 
 
@@ -40,14 +42,14 @@ func get_input():
 		
 	if Input.is_action_pressed("ui_left") or (swipe_left and $"/root/Global".finger_moving):
 		if rotation_degrees > 100:
-			rotation_degrees -= 2
+			rotation_degrees -= rotation_speed
 			if !$Rumble.playing:
 				$Rumble.play()
 			
 		
 	if Input.is_action_pressed("ui_right") or (swipe_right and $"/root/Global".finger_moving):
 		if rotation_degrees < 260:
-			rotation_degrees += 2
+			rotation_degrees += rotation_speed
 			if !$Rumble.playing:
 				$Rumble.play()
 
@@ -82,14 +84,19 @@ func _input(event):
 					tap_shoot = true
 					touch_timer = 0
 	
-#	if $"/root/Global".finger_moving == false:
-#		swipe_left = false
-#		swipe_right = false
-#		return
 	
 	if event is InputEventScreenDrag:
 		
-#		$"/root/Global".finger_moving = true
+		print(event.speed.x)
+		rotation_speed = 4
+		if event.speed.x > 150 or event.speed.x < -150:
+			rotation_speed = 5
+		if event.speed.x > 250 or event.speed.x < -250:
+			rotation_speed = 6
+		if event.speed.x > 450 or event.speed.x < -450:
+			rotation_speed = 8
+		
+		$"/root/Global".finger_moving = true
 		
 		if Swipe.get_swipe_direction(event.relative, 5) == Vector2.LEFT:
 			if swipe_left:
@@ -105,10 +112,12 @@ func _input(event):
 	if Swipe.on_area == false && swipe_left == true:
 		swipe_left_released = true
 		swipe_left = false
+		swipe_right = false
 
 	if Swipe.on_area == false && swipe_right == true:
 		swipe_right_released = true
 		swipe_right = false	
+		swipe_left = false
 	
 	
 func _physics_process(delta: float) -> void:
@@ -121,6 +130,8 @@ func _physics_process(delta: float) -> void:
 			$"/root/Global".finger_moving = true
 		else:
 			$"/root/Global".finger_moving = false
+			swipe_left = false
+			swipe_right = false
 	last_mouse = get_global_mouse_position()
 	get_input()
 	
@@ -177,4 +188,3 @@ func smoke_effect():
 		$Smoke.play("smoke")
 		yield(get_tree().create_timer(0.5), "timeout")
 		$Smoke.visible = false
-

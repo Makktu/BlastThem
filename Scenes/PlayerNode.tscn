@@ -187,6 +187,6 @@ scale = Vector2( 2.91721, 2.64502 )
 z_index = -10
 frames = SubResource( 15 )
 animation = "smoke"
-frame = 1
+frame = 2
 speed_scale = 2.0
 playing = true
