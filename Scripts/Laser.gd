@@ -15,6 +15,8 @@ var velocity = Vector2(0, speed)
 
 var increased_speed = false
 
+var stuck_counter = 0
+
 
 func _ready() -> void:
 	velocity = velocity.rotated(deg2rad(global_rotation_degrees))
@@ -26,6 +28,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if $Timer.is_stopped():
 		$Timer.start()
+	if current_pos_x == position.x and current_pos_y == position.y:
+		stuck_counter += 1
+		if stuck_counter >= 100:
+			queue_free()
+			stuck_counter = 0
+	stuck_counter = 0
 	current_pos_x = position.x
 	current_pos_y = position.y
 	var collision_info = move_and_collide(velocity * delta)
