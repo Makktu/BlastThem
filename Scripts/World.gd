@@ -16,6 +16,10 @@ var local_score = 0
 
 
 func _ready() -> void:
+	if $"/root/Global".help_done:
+		$Controls.queue_free()
+	$PlatformInfo.text = $"/root/Global".user_OS
+	$Controls.text = "ROTATE CANNON\nArrow left/right or Swipe\n\nFIRE\nArrow Up or Tap Screen"
 	for n in 4:
 		add_row()
 		move_down()
@@ -55,6 +59,13 @@ func _unhandled_input(event):
 	if Input.is_action_pressed("ui_cancel"):
 		if !blown_up:
 			blow_them_up()
+			
+
+func _process(delta):
+	if !$"/root/Global".help_showing and !$"/root/Global".help_done:
+		$Controls/AnimationPlayer.play("fade_out")
+		$"/root/Global".help_done = true
+		
 
 func _physics_process(delta):
 	if $"/root/Global".player_score != local_score:
