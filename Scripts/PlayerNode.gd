@@ -15,7 +15,7 @@ var swipe_right_released = false
 var touch_timer = 0
 var tap_shoot = false
 
-var rotation_speed = 4
+var rotation_speed = 0.8
 
 var last_mouse = Vector2.ZERO
 
@@ -88,13 +88,13 @@ func _input(event):
 	if event is InputEventScreenDrag:
 		
 		print(event.speed.x)
-		rotation_speed = 4
+		rotation_speed = 0.8
 		if event.speed.x > 150 or event.speed.x < -150:
-			rotation_speed = 5
+			rotation_speed = 1.3
 		if event.speed.x > 250 or event.speed.x < -250:
-			rotation_speed = 6
+			rotation_speed = 2.25
 		if event.speed.x > 450 or event.speed.x < -450:
-			rotation_speed = 8
+			rotation_speed = 3.5
 		
 		$"/root/Global".finger_moving = true
 		

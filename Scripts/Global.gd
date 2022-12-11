@@ -5,6 +5,10 @@ onready var laser_fired = false
 onready var screensize = get_viewport().size
 onready var laser_angle = 0
 
+var save_score = File.new()
+var save_path = "user://savegame.save"
+var save_data = {"BEST SCORE": 0}
+
 var screen_is_touched = false
 var finger_moving = false
 var touch_counter = 0
@@ -37,6 +41,11 @@ var user_OS = OS.get_name()
 
 func _ready() -> void:
 	print(user_OS)
+	if not save_score.file_exists(save_path):
+		save_best_score()
+	else:
+		best_score = read_save_score()
+	
 	
 func kaboom(type = ""):
 	if type == "red":
@@ -46,6 +55,7 @@ func kaboom(type = ""):
 		
 func game_over():
 	# interrupt all actions
+
 	
 	get_tree().paused = true
 	game_is_over = true
@@ -56,6 +66,10 @@ func game_over():
 	if best_score_beaten:
 		$CanvasLayer/GameOverFade/NewBestScore.visible = true
 		$BestScoreTune.play()
+		save_data["BEST SCORE"] = player_score
+		save_score.open(save_path, File.WRITE)
+		save_score.store_var(save_data)
+		save_score.close()
 	
 	game_over_fade()
 	
@@ -87,3 +101,16 @@ func _on_PlayAgain_pressed() -> void:
 
 func _on_FadeTimer_timeout() -> void:
 	$CanvasLayer/GameOverFade/PlayAgain.visible = true
+	
+
+func save_best_score():
+	save_score.open(save_path, File.WRITE)
+	save_score.store_var(save_data)
+	save_score.close()
+	
+	
+func read_save_score():
+	save_score.open(save_path, File.READ)
+	save_data = save_score.get_var()
+	save_score.close()
+	return save_data["BEST SCORE"]

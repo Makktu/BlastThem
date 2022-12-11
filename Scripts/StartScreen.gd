@@ -5,7 +5,8 @@ var title_direction = -20
 func _ready() -> void:
 	$AudioStreamPlayer.play()
 	_on_TitleTimer_timeout()
-	pass
+	$BGContainer/BestScore/BestScore.text = str($"/root/Global".best_score)
+
 
 
 func _on_START_pressed() -> void:
