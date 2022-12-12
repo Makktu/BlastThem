@@ -124,9 +124,4 @@ anims/shoot = SubResource( 5 )
 
 [node name="Rumble" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-
-[node name="HelpMsgTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
-[connection signal="timeout" from="HelpMsgTimer" to="." method="_on_HelpMsgTimer_timeout"]
+volume_db = -10.0

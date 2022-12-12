@@ -59,9 +59,7 @@ func get_input():
 		$Rumble.stop()
 		
 		
-	if Input.is_action_pressed("ui_up") or tap_shoot:
-		if $"/root/Global".help_showing:
-			$HelpMsgTimer.start()			
+	if Input.is_action_pressed("ui_up") or tap_shoot:		
 		if !$"/root/Global".laser_fired:
 			$"/root/Global".laser_fired = true
 			$"/root/Global".moved_down = false
@@ -190,7 +188,3 @@ func smoke_effect():
 		$Smoke.play("smoke")
 		yield(get_tree().create_timer(0.5), "timeout")
 		$Smoke.visible = false
-
-
-func _on_HelpMsgTimer_timeout():
-	$"/root/Global".help_showing = false

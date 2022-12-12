@@ -5,9 +5,6 @@ onready var laser_fired = false
 onready var screensize = get_viewport().size
 onready var laser_angle = 0
 
-var help_showing = true
-var help_done = false
-
 var save_score = File.new()
 var save_path = "user://savegame.save"
 var save_data = {"BEST SCORE": 0}
@@ -43,6 +40,7 @@ var user_OS = OS.get_name()
 
 
 func _ready() -> void:
+#	OS.window_fullscreen = true
 	print(user_OS)
 	if not save_score.file_exists(save_path):
 		save_best_score()
