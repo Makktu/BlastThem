@@ -35,7 +35,7 @@ func _on_Area2D_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
-	$\"/root/Global\".player_score += 2
+	$\"/root/Global\".player_score += 6
 	queue_free()
 
 
@@ -56,4 +56,4 @@ texture = ExtResource( 2 )
 
 [node name="PuffOfSmoke" parent="." index="5"]
 modulate = Color( 0.909804, 0.819608, 0.0980392, 1 )
-frame = 30
+frame = 44

@@ -44,7 +44,7 @@ func _on_Area2D_body_entered(body: Node) -> void:
 
 
 func _on_Timer_timeout():
-	$\"/root/Global\".player_score += 10
+	$\"/root/Global\".player_score += 40
 	$\"/root/Global\".balls_boosted = true
 	$\"/root/Global\".boosted_shots = 40
 	$\"/root/Global\".diamond_shot = true

@@ -75,7 +75,7 @@ func _on_Timer_timeout():
 		$\"/root/Global\".balls_boosted = true
 		$\"/root/Global\".boosted_shots = 15
 #	$\"/root/Global\".balls_allowed = 15
-	$\"/root/Global\".player_score += 3
+	$\"/root/Global\".player_score += 15
 	queue_free()
 
 "
@@ -224,7 +224,7 @@ volume_db = -10.0
 position = Vector2( 450, -920 )
 scale = Vector2( 8.55664, 11.584 )
 frames = SubResource( 23 )
-frame = 24
+frame = 29
 playing = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
