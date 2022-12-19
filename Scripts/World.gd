@@ -44,6 +44,11 @@ func move_down():
 	if blown_up:
 		blown_up = false
 	$RowBoom.play()
+#	print(visible_rows.size())
+#	if visible_rows.size() > 10:
+#		$BGHolder/AnimationPlayer.play("second")
+#	elif visible_rows.size() <= 10:
+#		$BGHolder/AnimationPlayer.play("first")
 
 func blow_them_up():
 	var blown_up = visible_rows[0]
@@ -65,3 +70,12 @@ func _physics_process(delta):
 			$"/root/Global".best_score = local_score
 			$Score.update_best_score(local_score)
 			$"/root/Global".best_score_beaten = true
+	
+	if $"/root/Global".balls_allowed == 40:
+		$BGHolder/AnimationPlayer.play("second")
+		
+	if $"/root/Global".balls_allowed == 15:
+		$BGHolder/AnimationPlayer.play("first")
+		
+	if $"/root/Global".balls_allowed == 5:
+		$BGHolder/AnimationPlayer.play("RESET")
