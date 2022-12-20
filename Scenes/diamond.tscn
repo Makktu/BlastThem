@@ -48,6 +48,7 @@ func _on_Timer_timeout():
 	$\"/root/Global\".balls_boosted = true
 	$\"/root/Global\".boosted_shots = 40
 	$\"/root/Global\".diamond_shot = true
+	$\"/root/Global\".flag_diamond = true
 	queue_free()
 
 
@@ -166,4 +167,4 @@ pitch_scale = 2.0
 stream = ExtResource( 5 )
 
 [node name="PuffOfSmoke" parent="." index="7"]
-frame = 4
+frame = 30

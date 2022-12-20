@@ -155,6 +155,12 @@ func shoot():
 	if $"/root/Global".charge_has_played:
 		$"/root/Global".charge_has_played = false
 		
+	if $"/root/Global".flag_bomb and !$"/root/Global".balls_boosted:
+		$"/root/Global".flag_bomb = false
+
+	if $"/root/Global".flag_diamond and !$"/root/Global".balls_boosted:
+		$"/root/Global".flag_diamond = false
+		
 	if tap_shoot:
 		tap_shoot = false
 		

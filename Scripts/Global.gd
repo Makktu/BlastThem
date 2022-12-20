@@ -38,6 +38,9 @@ var first_bomb = false
 
 var user_OS = OS.get_name()
 
+var flag_bomb = false
+var flag_diamond = false
+
 
 func _ready() -> void:
 #	OS.window_fullscreen = true
