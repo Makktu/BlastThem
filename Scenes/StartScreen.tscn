@@ -1,17 +1,137 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Assets/game_start_music.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/StartScreen.gd" type="Script" id=2]
 [ext_resource path="res://Assets/BlastThemLogo.png" type="Texture" id=3]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/START.gd" type="Script" id=5]
+[ext_resource path="res://Assets/brightyellowbrick.png" type="Texture" id=6]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0020.png" type="Texture" id=7]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0025.png" type="Texture" id=8]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0038.png" type="Texture" id=9]
+[ext_resource path="res://Assets/bomb.png" type="Texture" id=10]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0023.png" type="Texture" id=11]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0008.png" type="Texture" id=12]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0010.png" type="Texture" id=13]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0011.png" type="Texture" id=14]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0012.png" type="Texture" id=15]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0014.png" type="Texture" id=16]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0039.png" type="Texture" id=17]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0024.png" type="Texture" id=18]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0021.png" type="Texture" id=19]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0022.png" type="Texture" id=20]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0019.png" type="Texture" id=21]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0026.png" type="Texture" id=22]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0027.png" type="Texture" id=23]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0028.png" type="Texture" id=24]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0029.png" type="Texture" id=25]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0030.png" type="Texture" id=26]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0031.png" type="Texture" id=27]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0036.png" type="Texture" id=28]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0037.png" type="Texture" id=29]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0015.png" type="Texture" id=30]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0016.png" type="Texture" id=31]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0017.png" type="Texture" id=32]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0009.png" type="Texture" id=33]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0013.png" type="Texture" id=34]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0040.png" type="Texture" id=35]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0018.png" type="Texture" id=36]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0041.png" type="Texture" id=37]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0042.png" type="Texture" id=38]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0032.png" type="Texture" id=39]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0033.png" type="Texture" id=40]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0034.png" type="Texture" id=41]
+[ext_resource path="res://Assets/particles_fireball_small_wind/0035.png" type="Texture" id=42]
+[ext_resource path="res://Assets/diamond_blue.png" type="Texture" id=43]
+[ext_resource path="res://Assets/light.png" type="Texture" id=44]
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "diamond_pulse"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, 3 ), Vector2( 5, 5 ), Vector2( 3, 3 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "light_out"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 24.19 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 16.0 ]
+}
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 33 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 34 ), ExtResource( 16 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 36 ), ExtResource( 21 ), ExtResource( 7 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 11 ), ExtResource( 18 ), ExtResource( 8 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 9 ), ExtResource( 17 ), ExtResource( 35 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"loop": true,
+"name": "default",
+"speed": 20.0
+} ]
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
 font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+bg_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
@@ -57,7 +177,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.8, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0.00392157, 0.764706, 0.862745, 0.521569 ), Color( 0.909804, 0.819608, 0.0980392, 1 ) ]
+"values": [ Color( 0.941176, 0.113725, 0.027451, 1 ), Color( 0, 0, 0, 1 ), Color( 0.941176, 0.113725, 0.027451, 1 ) ]
 }
 
 [sub_resource type="DynamicFont" id=6]
@@ -65,7 +185,6 @@ size = 40
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=9]
-size = 24
 font_data = ExtResource( 4 )
 
 [node name="StartScreen" type="Node2D"]
@@ -78,12 +197,44 @@ margin_right = 725.0
 margin_bottom = 1297.0
 color = Color( 0.00392157, 0.764706, 0.862745, 1 )
 
+[node name="BrickBG" type="Sprite" parent="BGContainer/ColorRect"]
+self_modulate = Color( 0.909804, 0.819608, 0.0980392, 1 )
+position = Vector2( 353, 642 )
+scale = Vector2( 52.0333, 88.6667 )
+texture = ExtResource( 6 )
+
+[node name="Diamond" type="Sprite" parent="BGContainer/ColorRect"]
+position = Vector2( 98, 101 )
+scale = Vector2( 0.16511, 0.159257 )
+texture = ExtResource( 43 )
+
+[node name="Light2D" type="Light2D" parent="BGContainer/ColorRect/Diamond"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 44 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BGContainer/ColorRect/Diamond/Light2D"]
+anims/RESET = SubResource( 11 )
+anims/diamond_pulse = SubResource( 12 )
+anims/light_out = SubResource( 13 )
+
+[node name="Bomb" type="Sprite" parent="BGContainer/ColorRect"]
+position = Vector2( 394, 956 )
+scale = Vector2( 0.363499, 0.367418 )
+texture = ExtResource( 10 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="BGContainer/ColorRect/Bomb"]
+position = Vector2( 503.44, -816.509 )
+scale = Vector2( 6, 9 )
+frames = SubResource( 10 )
+frame = 17
+playing = true
+
 [node name="START" type="Button" parent="BGContainer"]
 margin_left = 169.0
 margin_top = 611.0
 margin_right = 569.0
 margin_bottom = 711.0
-custom_colors/font_color = Color( 0.00392157, 0.764706, 0.862745, 1 )
+custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
 custom_fonts/font = SubResource( 2 )
 custom_styles/hover = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
@@ -114,16 +265,17 @@ custom_fonts/font = SubResource( 6 )
 text = "0"
 
 [node name="Title" type="Sprite" parent="BGContainer"]
+self_modulate = Color( 0.909804, 0.0980392, 0.0980392, 1 )
 position = Vector2( 356, 391 )
 scale = Vector2( 1.25, 3 )
 texture = ExtResource( 3 )
 
 [node name="74apps" type="Label" parent="BGContainer"]
-margin_left = 245.0
-margin_top = 1248.0
-margin_right = 653.0
-margin_bottom = 1288.0
-custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+margin_left = 107.0
+margin_top = 1230.0
+margin_right = 515.0
+margin_bottom = 1270.0
+custom_colors/font_color = Color( 0.941176, 0.113725, 0.027451, 1 )
 custom_fonts/font = SubResource( 9 )
 text = "74apps.org"
 

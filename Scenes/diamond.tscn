@@ -167,4 +167,4 @@ pitch_scale = 2.0
 stream = ExtResource( 5 )
 
 [node name="PuffOfSmoke" parent="." index="7"]
-frame = 30
+frame = 41
