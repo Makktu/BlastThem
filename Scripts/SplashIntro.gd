@@ -12,6 +12,7 @@ func _on_Timer_timeout():
 
 func _on_Timer2_timeout():
 	get_tree().change_scene("res://Scenes/StartScreen.tscn")
+	$"/root/Global".playing_start_music = true
 
 
 func _on_ThereminTimer_timeout() -> void:

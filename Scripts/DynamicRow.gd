@@ -47,9 +47,4 @@ func create_boxes():
 		add_child(new_box)
 		box_x += 64
 		box_filled = false
-		
-#	$"/root/Global".turn += 1
-#	if $"/root/Global".turn == 5:
-#		$"/root/Global".difficulty += 1
-#		$"/root/Global".turn = 1
 

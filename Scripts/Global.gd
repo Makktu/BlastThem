@@ -41,6 +41,9 @@ var user_OS = OS.get_name()
 var flag_bomb = false
 var flag_diamond = false
 
+var playing_start_music = false
+var stop_start_music = false
+
 
 func _ready() -> void:
 #	OS.window_fullscreen = true
@@ -118,3 +121,10 @@ func read_save_score():
 	save_data = save_score.get_var()
 	save_score.close()
 	return save_data["BEST SCORE"]
+	
+func _process(delta):
+	if playing_start_music:
+		$StartScreenMusic.play()
+		playing_start_music = false
+	if stop_start_music:
+		$StartScreenMusic.stop()

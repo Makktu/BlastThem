@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Assets/game_start_music.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/StartScreen.gd" type="Script" id=2]
@@ -177,7 +177,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.8, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.941176, 0.113725, 0.027451, 1 ), Color( 0, 0, 0, 1 ), Color( 0.941176, 0.113725, 0.027451, 1 ) ]
+"values": [ Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0, 0, 0, 1 ), Color( 0.909804, 0.819608, 0.0980392, 1 ) ]
 }
 
 [sub_resource type="DynamicFont" id=6]
@@ -186,6 +186,24 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=9]
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 64
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=17]
+bg_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
+
+[sub_resource type="StyleBoxFlat" id=18]
+bg_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends Button
+
+
+func _ready() -> void:
+	pass
+"
 
 [node name="StartScreen" type="Node2D"]
 script = ExtResource( 2 )
@@ -226,7 +244,7 @@ texture = ExtResource( 10 )
 position = Vector2( 503.44, -816.509 )
 scale = Vector2( 6, 9 )
 frames = SubResource( 10 )
-frame = 17
+frame = 34
 playing = true
 
 [node name="START" type="Button" parent="BGContainer"]
@@ -234,7 +252,7 @@ margin_left = 169.0
 margin_top = 611.0
 margin_right = 569.0
 margin_bottom = 711.0
-custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 2 )
 custom_styles/hover = SubResource( 7 )
 custom_styles/normal = SubResource( 8 )
@@ -279,6 +297,19 @@ custom_colors/font_color = Color( 0.941176, 0.113725, 0.027451, 1 )
 custom_fonts/font = SubResource( 9 )
 text = "74apps.org"
 
+[node name="About" type="Button" parent="BGContainer"]
+margin_left = 439.0
+margin_top = 1186.0
+margin_right = 839.0
+margin_bottom = 1286.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
+custom_fonts/font = SubResource( 16 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/normal = SubResource( 18 )
+text = "ABOUT"
+script = SubResource( 19 )
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 1 )
 
@@ -287,4 +318,5 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="pressed" from="BGContainer/START" to="." method="_on_START_pressed"]
+[connection signal="pressed" from="BGContainer/About" to="." method="_on_About_pressed"]
 [connection signal="timeout" from="TitleTimer" to="." method="_on_TitleTimer_timeout"]
