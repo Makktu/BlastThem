@@ -12,7 +12,8 @@ func _ready() -> void:
 func _on_START_pressed() -> void:
 	$"/root/Global".game_is_over = false
 	$"/root/Global".stop_start_music = true
-	get_tree().change_scene("res://Scenes/World.tscn")
+	$KaboomTimer.start()
+
 
 
 func _on_TitleTimer_timeout() -> void:
@@ -24,3 +25,7 @@ func _on_TitleTimer_timeout() -> void:
 
 func _on_About_pressed():
 	get_tree().change_scene("res://Scenes/About.tscn")
+
+
+func _on_KaboomTimer_timeout() -> void:
+	get_tree().change_scene("res://Scenes/World.tscn")

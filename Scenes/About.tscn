@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Scenes/About.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/About.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Assets/brightyellowbrick.png" type="Texture" id=42]
 [ext_resource path="res://Assets/BlastThemLogo.png" type="Texture" id=43]

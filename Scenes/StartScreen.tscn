@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Assets/game_start_music.ogg" type="AudioStream" id=1]
 [ext_resource path="res://Scripts/StartScreen.gd" type="Script" id=2]
@@ -44,6 +44,7 @@
 [ext_resource path="res://Assets/particles_fireball_small_wind/0035.png" type="Texture" id=42]
 [ext_resource path="res://Assets/diamond_blue.png" type="Texture" id=43]
 [ext_resource path="res://Assets/light.png" type="Texture" id=44]
+[ext_resource path="res://Assets/explosion.png" type="Texture" id=45]
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -180,21 +181,109 @@ tracks/0/keys = {
 "values": [ Color( 0.909804, 0.819608, 0.0980392, 1 ), Color( 0, 0, 0, 1 ), Color( 0.909804, 0.819608, 0.0980392, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 192, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 128, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 64, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 0, 192, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 192, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 128, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 45 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=34]
+animations = [ {
+"frames": [ SubResource( 18 ), SubResource( 17 ), SubResource( 16 ), SubResource( 15 ), SubResource( 14 ), SubResource( 27 ), SubResource( 26 ), SubResource( 25 ), SubResource( 24 ), SubResource( 9 ), SubResource( 23 ), SubResource( 22 ), SubResource( 6 ), SubResource( 21 ), SubResource( 20 ), SubResource( 3 ) ],
+"loop": true,
+"name": "kaboom",
+"speed": 15.0
+} ]
+
+[sub_resource type="DynamicFont" id=29]
 size = 40
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=30]
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=31]
 size = 64
 font_data = ExtResource( 4 )
 
-[sub_resource type="StyleBoxFlat" id=17]
+[sub_resource type="StyleBoxFlat" id=32]
 bg_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 
-[sub_resource type="StyleBoxFlat" id=18]
+[sub_resource type="StyleBoxFlat" id=33]
 bg_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 
 [sub_resource type="GDScript" id=19]
@@ -244,7 +333,7 @@ texture = ExtResource( 10 )
 position = Vector2( 503.44, -816.509 )
 scale = Vector2( 6, 9 )
 frames = SubResource( 10 )
-frame = 34
+frame = 33
 playing = true
 
 [node name="START" type="Button" parent="BGContainer"]
@@ -264,13 +353,23 @@ root_node = NodePath("../../Title")
 anims/RESET = SubResource( 4 )
 anims/buttonflash = SubResource( 5 )
 
+[node name="Kaboom" type="AnimatedSprite" parent="BGContainer/START"]
+visible = false
+position = Vector2( 238, -13 )
+scale = Vector2( 35, 35 )
+z_index = 100
+frames = SubResource( 34 )
+animation = "kaboom"
+frame = 1
+speed_scale = 3.0
+
 [node name="BestScore" type="Label" parent="BGContainer"]
 margin_left = 162.0
 margin_top = 912.0
 margin_right = 570.0
 margin_bottom = 952.0
 custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 29 )
 text = "Best Score"
 
 [node name="BestScore" type="Label" parent="BGContainer/BestScore"]
@@ -279,11 +378,11 @@ margin_top = 54.0
 margin_right = 540.0
 margin_bottom = 86.0
 custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 29 )
 text = "0"
 
 [node name="Title" type="Sprite" parent="BGContainer"]
-self_modulate = Color( 0.909804, 0.0980392, 0.0980392, 1 )
+self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 356, 391 )
 scale = Vector2( 1.25, 3 )
 texture = ExtResource( 3 )
@@ -294,7 +393,7 @@ margin_top = 1230.0
 margin_right = 515.0
 margin_bottom = 1270.0
 custom_colors/font_color = Color( 0.941176, 0.113725, 0.027451, 1 )
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 30 )
 text = "74apps.org"
 
 [node name="About" type="Button" parent="BGContainer"]
@@ -304,9 +403,9 @@ margin_right = 839.0
 margin_bottom = 1286.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
-custom_fonts/font = SubResource( 16 )
-custom_styles/hover = SubResource( 17 )
-custom_styles/normal = SubResource( 18 )
+custom_fonts/font = SubResource( 31 )
+custom_styles/hover = SubResource( 32 )
+custom_styles/normal = SubResource( 33 )
 text = "ABOUT"
 script = SubResource( 19 )
 
@@ -317,6 +416,12 @@ stream = ExtResource( 1 )
 wait_time = 0.5
 one_shot = true
 
+[node name="KaboomTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="pressed" from="BGContainer/START" to="." method="_on_START_pressed"]
+[connection signal="pressed" from="BGContainer/START" to="BGContainer/START" method="_on_START_pressed"]
 [connection signal="pressed" from="BGContainer/About" to="." method="_on_About_pressed"]
 [connection signal="timeout" from="TitleTimer" to="." method="_on_TitleTimer_timeout"]
+[connection signal="timeout" from="KaboomTimer" to="." method="_on_KaboomTimer_timeout"]
