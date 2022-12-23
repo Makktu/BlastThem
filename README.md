@@ -1,10 +1,10 @@
 # BLAST THEM!
 
-**Completion Estimate: 60%.** Still not much more than an advanced prototype. Touchscreen controls are not working. General game balancing is still unfinished. Game over triggers awkwardly at the moment, too, with action still taking place in the background.
+**Completion Estimate: 60%.** 
 
 A game for mobile and web.
 
-Point the cannon and shoot. Destroy all the bricks and other items that appear. Each row of items will descend one or more spaces per turn. If anything gets down to where the cannon is, Game Over.
+Point the cannon and shoot. Destroy all the bricks, bombs and diamonds. Each row of items will descend one or more spaces per turn. If anything gets to where the cannon is, Game Over.
 
 The player gets 5 bullets per turn.
 
@@ -26,7 +26,7 @@ Swipe left or right anywhere on-screen to rotate the cannon left or right. Relea
 
 The player can tap to fire a salvo without moving the cannon.
 
-++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++
 
 White Brick - 3 hits required to destroy. Worth 3 point.
 
