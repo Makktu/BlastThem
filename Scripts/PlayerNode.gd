@@ -186,11 +186,3 @@ func shoot():
 			$ShootingAnim.play("RESET")
 		
 	$ShootingAnim.play("RESET")
-	
-	
-func smoke_effect():
-		$Smoke.visible = true
-		$Smoke.play("smoke")
-		$Smoke.play("smoke")
-		yield(get_tree().create_timer(0.5), "timeout")
-		$Smoke.visible = false

@@ -26,14 +26,14 @@ shape = SubResource( 18 )
 stream = ExtResource( 1 )
 volume_db = -11.509
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 3 )
 texture_scale = 2.24
 energy = 8.32
 
+[node name="LifetimeTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="LifetimeTimer" to="." method="_on_LifetimeTimer_timeout"]
