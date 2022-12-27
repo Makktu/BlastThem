@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Score.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/TouchScreenButton.gd" type="Script" id=5]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://Scenes/BGHolder.gd" type="Script" id=7]
+[ext_resource path="res://Scripts/BGHolder.gd" type="Script" id=7]
 
 [sub_resource type="Environment" id=10]
 background_mode = 4
@@ -262,7 +262,7 @@ scale = Vector2( 0.879996, 1 )
 shape = SubResource( 3 )
 
 [node name="NextBalls" type="Node2D" parent="."]
-position = Vector2( 384, 1188 )
+position = Vector2( 374, 7 )
 script = SubResource( 5 )
 
 [node name="Shots" type="Label" parent="NextBalls"]

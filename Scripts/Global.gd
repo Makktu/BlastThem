@@ -61,9 +61,6 @@ func kaboom(type = ""):
 		$BoxKiller.play()
 		
 func game_over():
-	# interrupt all actions
-
-	
 	get_tree().paused = true
 	game_is_over = true
 	
