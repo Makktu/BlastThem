@@ -28,10 +28,10 @@ custom_fonts/font = SubResource( 6 )
 text = "0"
 
 [node name="BestScore" type="Label" parent="."]
-margin_left = 547.0
-margin_top = 17.0
-margin_right = 955.0
-margin_bottom = 67.0
+margin_left = 12.0
+margin_top = 98.0
+margin_right = 420.0
+margin_bottom = 148.0
 custom_colors/font_color = Color( 0.254902, 0.909804, 0.0980392, 1 )
 custom_fonts/font = SubResource( 5 )
 text = "Best"
