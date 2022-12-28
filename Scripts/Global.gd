@@ -44,10 +44,12 @@ var flag_diamond = false
 var playing_start_music = false
 var stop_start_music = false
 
+#var visible_shots_remaining = balls_allowed
+#var visible_shots_changed = false
+#var shooting_is_over = false
+
 
 func _ready() -> void:
-#	OS.window_fullscreen = true
-	print(user_OS)
 	if not save_score.file_exists(save_path):
 		save_best_score()
 	else:

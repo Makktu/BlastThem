@@ -36,9 +36,9 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 		$"/root/Global".balls_allowed = 5
 		if !$"/root/Global".moved_down:
 			get_parent().move_down()
-			if $"/root/Global".player_score > 800:
+			if $"/root/Global".player_score > 600:
 				get_parent().move_down()
-			if $"/root/Global".player_score > 1200 and !$"/root/Global".balls_boosted:
+			if $"/root/Global".player_score > 1100 and !$"/root/Global".balls_boosted:
 				get_parent().move_down()
 			$"/root/Global".moved_down = true
 			$"/root/Global".balls_allowed = 5

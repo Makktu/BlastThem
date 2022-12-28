@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="BlastThem!"
 run/main_scene="res://Scenes/SplashIntro.tscn"
-config/icon="res://Assets/orangebrick.png"
+config/icon="res://Assets/icon-60@3x.png"
 
 [autoload]
 

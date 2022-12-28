@@ -76,6 +76,9 @@ func _physics_process(delta):
 			
 func _process(delta):
 	check_screen_throb()
+#	if $"/root/Global".visible_shots_changed:
+#		$NextBalls/Shots/Amount.text = str($"/root/Global".visible_shots_remaining)
+#		$"/root/Global".visible_shots_changed = false
 
 
 func check_screen_throb():

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+#const shots_left_onscreen = preload()
+
 const pl_laser_beam = preload("res://Scenes/Laser.tscn")
 
 onready var Swipe = $"../SwipeScreenButton"
@@ -184,5 +186,9 @@ func shoot():
 		
 		if $"/root/Global".balls_allowed > 5:
 			$ShootingAnim.play("RESET")
+			
+#		$"/root/Global".visible_shots_remaining = $"/root/Global".balls_allowed - n
+#		$"/root/Global".visible_shots_changed = true
 		
 	$ShootingAnim.play("RESET")
+#	$"/root/Global".shooting_is_over = true

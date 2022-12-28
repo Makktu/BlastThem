@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Scenes/PlayerNode.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/bzzzt.wav" type="AudioStream" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/TouchScreenButton.gd" type="Script" id=5]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Scripts/BGHolder.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Fireball - Effect/Effects_Fire_0_28.png" type="Texture" id=8]
 
 [sub_resource type="Environment" id=10]
 background_mode = 4
@@ -36,20 +37,12 @@ extents = Vector2( 396.593, 8.5 )
 [sub_resource type="GDScript" id=5]
 script/source = "extends Node2D
 
-#
-#var value = \"0\"
-#var global_best_score = 0
-#
-#func _ready() -> void:
-#	if $\"/root/Global\".best_score > 0:
-#		update_best_score($\"/root/Global\".best_score)
-
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if $\"/root/Global\".balls_boosted:
 		update_shots($\"/root/Global\".boosted_shots)
 	else:
 		update_shots($\"/root/Global\".balls_allowed)
-		
+
 
 func update_shots(shots):
 	if shots == 40:
@@ -262,25 +255,21 @@ scale = Vector2( 0.879996, 1 )
 shape = SubResource( 3 )
 
 [node name="NextBalls" type="Node2D" parent="."]
-position = Vector2( 374, 7 )
+position = Vector2( 504, 1064 )
 script = SubResource( 5 )
 
-[node name="Shots" type="Label" parent="NextBalls"]
+[node name="Shots" type="Sprite" parent="NextBalls"]
 modulate = Color( 0.956863, 0.929412, 0.929412, 1 )
-margin_left = -359.0
-margin_top = 34.0
-margin_right = 49.0
-margin_bottom = 134.0
-rect_scale = Vector2( 0.5, 0.5 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 6 )
-text = "Shots:"
+position = Vector2( -162, 41 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 8 )
 
 [node name="Amount" type="Label" parent="NextBalls/Shots"]
 modulate = Color( 0.956863, 0.929412, 0.929412, 1 )
-margin_left = 466.0
-margin_right = 898.0
-margin_bottom = 100.0
+margin_left = 84.0
+margin_top = -44.0
+margin_right = 516.0
+margin_bottom = 56.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "5"
