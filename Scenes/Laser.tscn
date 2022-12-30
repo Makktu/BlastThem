@@ -32,7 +32,7 @@ texture_scale = 2.24
 energy = 8.32
 
 [node name="LifetimeTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 5.0
 one_shot = true
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

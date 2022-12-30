@@ -274,6 +274,7 @@ size = 40
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=30]
+size = 25
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=31]
@@ -333,7 +334,7 @@ texture = ExtResource( 10 )
 position = Vector2( 503.44, -816.509 )
 scale = Vector2( 6, 9 )
 frames = SubResource( 10 )
-frame = 33
+frame = 26
 playing = true
 
 [node name="START" type="Button" parent="BGContainer"]
@@ -388,20 +389,20 @@ scale = Vector2( 1.25, 3 )
 texture = ExtResource( 3 )
 
 [node name="74apps" type="Label" parent="BGContainer"]
-margin_left = 107.0
-margin_top = 1230.0
-margin_right = 515.0
-margin_bottom = 1270.0
+margin_left = 17.0
+margin_top = 1246.0
+margin_right = 425.0
+margin_bottom = 1286.0
 custom_colors/font_color = Color( 0.941176, 0.113725, 0.027451, 1 )
 custom_fonts/font = SubResource( 30 )
 text = "74apps.org"
 
 [node name="About" type="Button" parent="BGContainer"]
-margin_left = 439.0
-margin_top = 1186.0
-margin_right = 839.0
-margin_bottom = 1286.0
-rect_scale = Vector2( 0.5, 0.5 )
+margin_left = 396.0
+margin_top = 1147.0
+margin_right = 796.0
+margin_bottom = 1247.0
+rect_scale = Vector2( 0.7, 0.7 )
 custom_colors/font_color = Color( 0.909804, 0.819608, 0.0980392, 1 )
 custom_fonts/font = SubResource( 31 )
 custom_styles/hover = SubResource( 32 )
