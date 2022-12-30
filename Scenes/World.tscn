@@ -7,7 +7,6 @@
 [ext_resource path="res://Scripts/TouchScreenButton.gd" type="Script" id=5]
 [ext_resource path="res://Assets/PressStart2P-Regular.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Scripts/BGHolder.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Fireball - Effect/Effects_Fire_0_28.png" type="Texture" id=8]
 
 [sub_resource type="Environment" id=10]
 background_mode = 4
@@ -54,6 +53,10 @@ func update_shots(shots):
 	$Shots/Amount.text = str(shots)
 
 "
+
+[sub_resource type="DynamicFont" id=15]
+size = 76
+font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 76
@@ -255,21 +258,25 @@ scale = Vector2( 0.879996, 1 )
 shape = SubResource( 3 )
 
 [node name="NextBalls" type="Node2D" parent="."]
-position = Vector2( 497, 1101 )
+position = Vector2( 524, 1090 )
 script = SubResource( 5 )
 
-[node name="Shots" type="Sprite" parent="NextBalls"]
+[node name="Shots" type="Label" parent="NextBalls"]
 modulate = Color( 0.956863, 0.929412, 0.929412, 1 )
-position = Vector2( -162, 41 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 8 )
+margin_left = -224.0
+margin_top = 39.0
+margin_right = 536.0
+margin_bottom = 139.0
+rect_scale = Vector2( 0.25, 0.25 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "SHOTS:"
 
 [node name="Amount" type="Label" parent="NextBalls/Shots"]
 modulate = Color( 0.956863, 0.929412, 0.929412, 1 )
-margin_left = 84.0
-margin_top = -44.0
-margin_right = 516.0
-margin_bottom = 56.0
+margin_left = 452.0
+margin_right = 884.0
+margin_bottom = 100.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = SubResource( 6 )
 text = "5"

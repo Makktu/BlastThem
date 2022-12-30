@@ -334,7 +334,7 @@ texture = ExtResource( 10 )
 position = Vector2( 503.44, -816.509 )
 scale = Vector2( 6, 9 )
 frames = SubResource( 10 )
-frame = 26
+frame = 8
 playing = true
 
 [node name="START" type="Button" parent="BGContainer"]
